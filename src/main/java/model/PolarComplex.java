@@ -1,11 +1,14 @@
 package model;
 
+/**
+ * Representa la forma polar de un complejo
+ */
 public class PolarComplex extends ComplexNumber {
 
-    private double module;
+    private double modulus;
     private double argument;
 
-    public PolarComplex(double module, double argument) {
+    public PolarComplex(double modulus, double argument) {
         //TODO implementar
     }
 
@@ -43,7 +46,7 @@ public class PolarComplex extends ComplexNumber {
         return this;
     }
 
-    public double getModule() {
+    public double getModulus() {
         //TODO implementar
         return 0;
     }

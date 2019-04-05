@@ -44,10 +44,10 @@ public class RectangularComplexTest {
         RectangularComplex rectangularComplex = new RectangularComplex(3, 3);
         PolarComplex polar = rectangularComplex.toPolar();
 
-        double module = polar.getModule();
+        double modulus = polar.getModulus();
         double argument = polar.getArgument();
 
-        assertEquals(3, module);
+        assertEquals(3, modulus);
         assertEquals(Math.PI / 4.0, argument);
     }
 
@@ -57,10 +57,10 @@ public class RectangularComplexTest {
         RectangularComplex rectangularComplex = new RectangularComplex(-3, -3);
         PolarComplex polar = rectangularComplex.toPolar();
 
-        double module = polar.getModule();
+        double modulus = polar.getModulus();
         double argument = polar.getArgument();
 
-        assertEquals(3, module);
+        assertEquals(3, modulus);
         assertEquals((-3/4) * Math.PI, argument);
     }
 

@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Representa la forma binomial de un complejo
+ */
 public class RectangularComplex extends ComplexNumber {
 
     private double realPart;
@@ -41,10 +44,10 @@ public class RectangularComplex extends ComplexNumber {
     }
 
     public PolarComplex toPolar() {
-        double module = this.calculateModule();
+        double modulus = this.calculateModulus();
         double argument = this.calculateArgument();
 
-        return new PolarComplex(module, argument);
+        return new PolarComplex(modulus, argument);
     }
 
     public RectangularComplex toRectangular() {
@@ -63,13 +66,13 @@ public class RectangularComplex extends ComplexNumber {
         return this.realPart;
     }
 
-    private double calculateModule() {
+    private double calculateModulus() {
         if(this.isNullComplex()) {
             return 0.0;
         }
         
-        double moduleSquared = this.realPart * this.realPart + this.imaginaryPart * this.imaginaryPart;
-        return Math.sqrt(moduleSquared);
+        double modulusSquared = this.realPart * this.realPart + this.imaginaryPart * this.imaginaryPart;
+        return Math.sqrt(modulusSquared);
     }
 
     private double calculateArgument() {

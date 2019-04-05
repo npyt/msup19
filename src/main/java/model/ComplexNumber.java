@@ -1,14 +1,47 @@
 package model;
 
 public abstract class ComplexNumber {
+
+    /**
+     * Suma de complejos
+     */
     abstract ComplexNumber add(ComplexNumber z);
+
+    /**
+     * Resta de complejos.
+     * @param z sustraendo
+     */
     abstract ComplexNumber subtract(ComplexNumber z);
+
+    /**
+     * Multiplicacion de complejos
+     */
     abstract ComplexNumber multiply(ComplexNumber z);
+
+    /**
+     * Cociente de complejos
+     * @param z divisor
+     */
     abstract ComplexNumber divideBy(ComplexNumber z);
+
+    /**
+     * Devuelve el conjugado de esta instancia
+     */
     abstract ComplexNumber conjugate();
+
+    /**
+     * Devuelve el equivalente al complejo en forma binomial
+     */
     abstract RectangularComplex toRectangular();
+
+    /**
+     * Devuelve el equivalente al complejo en forma polar
+     */
     abstract PolarComplex toPolar();
 
+    /**
+     * Devuelve <code>true</code> si el complejo es el complejo nulo
+     */
     public boolean isNullComplex(){
         double realPart = this.toRectangular().getRealPart();
         double imaginaryPart = this.toRectangular().getImaginaryPart();
@@ -21,11 +54,14 @@ public abstract class ComplexNumber {
         RectangularComplex rectangular = this.toRectangular();
         PolarComplex polar = this.toPolar();
         String s = "Forma binomial: (" + rectangular.getRealPart() + ", " + rectangular.getImaginaryPart() +
-                ") - Forma polar: [" + polar.getModule() + ", " + polar.getArgument() + "]";
+                ") - Forma polar: [" + polar.getModulus() + ", " + polar.getArgument() + "]";
 
         return s;
     }
 
+    /**
+     * Igualdad de complejos (por definicion: igualdad de sus partes reales e imaginarias)
+     */
     @Override
     public boolean equals(Object o){
         if (!(o instanceof ComplexNumber)) {
