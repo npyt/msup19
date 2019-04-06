@@ -60,4 +60,9 @@ public class PolarComplex extends ComplexNumber {
         //TODO implementar
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "[" + this.modulus + ", " + this.argument + "]";
+    }
 }

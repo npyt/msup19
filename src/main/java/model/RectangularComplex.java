@@ -85,6 +85,11 @@ public class RectangularComplex extends ComplexNumber {
     }
 
     public boolean isNullComplex() {
-        return this.realPart == 0 && this.imaginaryPart == 0;
+        return this.toPolar().isNullComplex();
+    }
+
+    @Override
+    public String toString() {
+        return "(" + this.realPart + ", " + this.imaginaryPart + ")";
     }
 }

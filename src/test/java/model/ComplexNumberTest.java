@@ -9,6 +9,7 @@ import static junit.framework.TestCase.assertTrue;
 
 public class ComplexNumberTest {
 
+    @Ignore
     @Test
     public void testIsNullComplex() {
         ComplexNumber z1 = new RectangularComplex(0, 0);

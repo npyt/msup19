@@ -42,19 +42,13 @@ public abstract class ComplexNumber {
     /**
      * Devuelve <code>true</code> si el complejo es el complejo nulo
      */
-    public boolean isNullComplex(){
-        double realPart = this.toRectangular().getRealPart();
-        double imaginaryPart = this.toRectangular().getImaginaryPart();
-
-        return realPart == 0 && imaginaryPart == 0;
-    }
+    abstract boolean isNullComplex();
 
     @Override
     public String toString() {
         RectangularComplex rectangular = this.toRectangular();
         PolarComplex polar = this.toPolar();
-        String s = "Forma binomial: (" + rectangular.getRealPart() + ", " + rectangular.getImaginaryPart() +
-                ") - Forma polar: [" + polar.getModulus() + ", " + polar.getArgument() + "]";
+        String s = "Forma binomial: " + rectangular.toString() + " - Forma polar: " + polar.toString();
 
         return s;
     }
