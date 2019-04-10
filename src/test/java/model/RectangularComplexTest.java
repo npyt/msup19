@@ -44,24 +44,41 @@ public class RectangularComplexTest {
         RectangularComplex rectangularComplex = new RectangularComplex(3, 3);
         PolarComplex polar = rectangularComplex.toPolar();
 
-        double modulus = polar.getModulus();
-        double argument = polar.getArgument();
-
-        assertEquals(3, modulus);
-        assertEquals(Math.PI / 4.0, argument);
+        PolarComplex expectedPolar = new PolarComplex(3, (1/4) * Math.PI);
+        assertEquals(expectedPolar, polar);
     }
 
+    //TODO des-ignorar una vez implementado el polar
     @Ignore
     @Test
     public void toPolar3rdQuadrant() {
         RectangularComplex rectangularComplex = new RectangularComplex(-3, -3);
         PolarComplex polar = rectangularComplex.toPolar();
 
-        double modulus = polar.getModulus();
-        double argument = polar.getArgument();
+        PolarComplex expectedPolar = new PolarComplex(3, (-3/4) * Math.PI);
+        assertEquals(expectedPolar, polar);
+    }
 
-        assertEquals(3, modulus);
-        assertEquals((-3/4) * Math.PI, argument);
+    //TODO des-ignorar una vez implementado el polar
+    @Ignore
+    @Test
+    public void toPolarPurelyImaginary1() {
+        RectangularComplex positivelyImaginary = new RectangularComplex(0, 5);
+        PolarComplex polar = positivelyImaginary.toPolar();
+
+        PolarComplex expectedPolar = new PolarComplex(5, (1/2) * Math.PI);
+        assertEquals(expectedPolar, polar);
+    }
+
+    //TODO des-ignorar una vez implementado el polar
+    @Ignore
+    @Test
+    public void toPolarPurelyImaginary2() {
+        RectangularComplex negativelyImaginary = new RectangularComplex(0, -5);
+        PolarComplex polar = negativelyImaginary.toPolar();
+
+        PolarComplex expectedPolar = new PolarComplex(5, (-1/2) * Math.PI);
+        assertEquals(expectedPolar, polar);
     }
 
     @Test

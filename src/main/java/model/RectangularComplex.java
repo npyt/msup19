@@ -76,6 +76,17 @@ public class RectangularComplex extends ComplexNumber {
     }
 
     private double calculateArgument() {
+        if(this.realPart == 0) {
+            if(this.imaginaryPart > 0) {
+                return Math.PI / 2.0;
+            }
+            if(this.imaginaryPart < 0) {
+                return Math.PI / -2.0;
+            }
+
+            return 0;
+        }
+
         double arctan = Math.atan(this.imaginaryPart / this.realPart);
         if(this.realPart < 0) {
             arctan += Math.PI;
