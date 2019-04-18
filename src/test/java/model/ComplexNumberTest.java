@@ -41,36 +41,4 @@ public class ComplexNumberTest {
         assertEquals(rectangular, polar);
     }
     
-    @Test
-    public void testRealParttoRectangular() {
-    	double argument = (2.0 / 3) * Math.PI;
-    	double modulus = 2;
-    	
-    	double expectedRealPart = -1;
-    	double expectedImaginaryPart = Math.sqrt(3);
-    	
-    	PolarComplex polarComplex = new PolarComplex(modulus, argument);
-    	
-        RectangularComplex rectangularComplex = polarComplex.toRectangular();
-        RectangularComplex expectedRectangular = new RectangularComplex(expectedRealPart, expectedImaginaryPart);
-        
-        assertEquals(expectedRectangular.getRealPart(), expectedRealPart);
-    }
-    
-    @Test
-    public void testImaginaryParttoRectangular() {
-    	double argument = (2.0 / 3) * Math.PI;
-    	double modulus = 2;
-
-    	double expectedRealPart = -1;
-    	double expectedImaginaryPart = Math.sqrt(3);
-    	
-    	
-    	PolarComplex polarComplex = new PolarComplex(modulus, argument);
-    	
-        RectangularComplex rectangularComplex = polarComplex.toRectangular();
-        RectangularComplex expectedRectangular = new RectangularComplex(expectedRealPart, expectedImaginaryPart);
-        
-        assertEquals(expectedRectangular.getImaginaryPart(), expectedImaginaryPart);
-    }
 }

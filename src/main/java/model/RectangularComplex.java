@@ -88,15 +88,25 @@ public class RectangularComplex extends ComplexNumber {
         }
 
         double arctan = Math.atan(this.imaginaryPart / this.realPart);
-        if(this.realPart < 0) {
+        
+        // Corrijo cuadrante equivalente y giro en el 4to cuadrante
+        
+        if((this.realPart < 0 && this.imaginaryPart > 0 && arctan < 0)  
+        	|| this.realPart < 0 && this.imaginaryPart < 0 && arctan > 0){
             arctan += Math.PI;
+        }else if (this.realPart > 0 && this.imaginaryPart < 0 && arctan < 0) {
+        	arctan = (2.0 * Math.PI) + arctan;
         }
         
         return arctan;
     }
 
     public boolean isNullComplex() {
-        return this.toPolar().isNullComplex();
+    	if (this.realPart == 0 && this.imaginaryPart == 0) {
+    		return true;
+    	}else {
+    		return false;
+    	}
     }
 
     @Override

@@ -70,8 +70,7 @@ public class PolarComplex extends ComplexNumber {
     }
 
     public boolean isNullComplex() {
-        //TODO implementar
-        return false;
+        return this.toRectangular().isNullComplex();
     }
 
     @Override

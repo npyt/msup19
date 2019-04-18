@@ -37,55 +37,40 @@ public class RectangularComplexTest {
         assertEquals(expected, subtraction);
     }
 
-    //TODO des-ignorar una vez implementado el polar
-    @Ignore
     @Test
-    public void toPolar1stQuadrant() {
+    public void toPolar1stQuadrantArgument() {
         RectangularComplex rectangularComplex = new RectangularComplex(3, 3);
         PolarComplex polar = rectangularComplex.toPolar();
 
-        PolarComplex expectedPolar = new PolarComplex(3, (1/4) * Math.PI);
-        assertEquals(expectedPolar, polar);
+        PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (1.0/4) * Math.PI);
+        assertEquals(expectedPolar.getArgument(), polar.getArgument());
     }
-
-    //TODO des-ignorar una vez implementado el polar
-    @Ignore
+    
     @Test
-    public void toPolar3rdQuadrant() {
+    public void toPolar2ndQuadrantArgument() {
+        RectangularComplex rectangularComplex = new RectangularComplex(-3, 3);
+        PolarComplex polar = rectangularComplex.toPolar();
+
+        PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (3.0/4) * Math.PI);
+        assertEquals(expectedPolar.getArgument(), polar.getArgument());
+    }
+    
+    @Test
+    public void toPolar3thQuadrantArgument() {
         RectangularComplex rectangularComplex = new RectangularComplex(-3, -3);
         PolarComplex polar = rectangularComplex.toPolar();
 
-        PolarComplex expectedPolar = new PolarComplex(3, (-3/4) * Math.PI);
-        assertEquals(expectedPolar, polar);
+        PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (5.0/4) * Math.PI);
+        assertEquals(expectedPolar.getArgument(), polar.getArgument());
     }
-
-    //TODO des-ignorar una vez implementado el polar
-    @Ignore
+    
     @Test
-    public void toPolarPurelyImaginary1() {
-        RectangularComplex positivelyImaginary = new RectangularComplex(0, 5);
-        PolarComplex polar = positivelyImaginary.toPolar();
+    public void toPolar4thQuadrantArgument() {
+        RectangularComplex rectangularComplex = new RectangularComplex(3, -3);
+        PolarComplex polar = rectangularComplex.toPolar();
 
-        PolarComplex expectedPolar = new PolarComplex(5, (1/2) * Math.PI);
-        assertEquals(expectedPolar, polar);
+        PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (7.0/4) * Math.PI);
+        assertEquals(expectedPolar.getArgument(), polar.getArgument());
     }
 
-    //TODO des-ignorar una vez implementado el polar
-    @Ignore
-    @Test
-    public void toPolarPurelyImaginary2() {
-        RectangularComplex negativelyImaginary = new RectangularComplex(0, -5);
-        PolarComplex polar = negativelyImaginary.toPolar();
-
-        PolarComplex expectedPolar = new PolarComplex(5, (-1/2) * Math.PI);
-        assertEquals(expectedPolar, polar);
-    }
-
-    @Test
-    public void testConjugate() {
-        RectangularComplex rectangularComplex = new RectangularComplex(4, -1);
-        RectangularComplex conjugate = rectangularComplex.conjugate();
-
-        assertEquals(new RectangularComplex(4, 1), conjugate);
-    }
 }
