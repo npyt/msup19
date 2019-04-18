@@ -9,7 +9,8 @@ public class PolarComplex extends ComplexNumber {
     private double argument;
 
     public PolarComplex(double modulus, double argument) {
-        //TODO implementar
+    	this.modulus = modulus;
+        this.argument = argument;
     }
 
     public ComplexNumber add(ComplexNumber z) {
@@ -38,22 +39,34 @@ public class PolarComplex extends ComplexNumber {
     }
 
     RectangularComplex toRectangular() {
-        //TODO implementar
-        return null;
+        double realPart = this.calculateRealPart();
+        double imaginaryPart = this.calculateImaginaryPart();
+    	
+        return new RectangularComplex(realPart, imaginaryPart);
     }
 
     PolarComplex toPolar() {
         return this;
     }
+    
+    public double calculateRealPart() {
+    	double realPart = Math.cos(this.argument) * this.modulus;
+    	
+    	return realPart;
+    }
+    
+    public double calculateImaginaryPart() {
+    	double imaginaryPart = Math.sin(this.argument) * this.modulus;
+    	
+    	return imaginaryPart;
+    }
 
     public double getModulus() {
-        //TODO implementar
-        return 0;
+    	return this.modulus;
     }
 
     public double getArgument() {
-        //TODO implementar
-        return 0;
+    	return this.argument;
     }
 
     public boolean isNullComplex() {

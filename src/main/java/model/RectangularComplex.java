@@ -82,8 +82,8 @@ public class RectangularComplex extends ComplexNumber {
             }
             if(this.imaginaryPart < 0) {
                 return Math.PI / -2.0;
-            }
-
+            }       
+            
             return 0;
         }
 
@@ -91,7 +91,7 @@ public class RectangularComplex extends ComplexNumber {
         if(this.realPart < 0) {
             arctan += Math.PI;
         }
-
+        
         return arctan;
     }
 
