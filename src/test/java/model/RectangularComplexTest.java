@@ -1,6 +1,5 @@
 package model;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
@@ -71,6 +70,14 @@ public class RectangularComplexTest {
 
         PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (7.0/4) * Math.PI);
         assertEquals(expectedPolar.getArgument(), polar.getArgument());
+    }
+
+    @Test
+    public void testConjugate() {
+        RectangularComplex rectangularComplex = new RectangularComplex(4, -1);
+        RectangularComplex conjugate = rectangularComplex.conjugate();
+
+        assertEquals(new RectangularComplex(4, 1), conjugate);
     }
 
 }

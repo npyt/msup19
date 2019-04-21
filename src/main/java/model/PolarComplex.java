@@ -49,13 +49,13 @@ public class PolarComplex extends ComplexNumber {
         return this;
     }
     
-    public double calculateRealPart() {
+    private double calculateRealPart() {
     	double realPart = Math.cos(this.argument) * this.modulus;
     	
     	return realPart;
     }
     
-    public double calculateImaginaryPart() {
+    private double calculateImaginaryPart() {
     	double imaginaryPart = Math.sin(this.argument) * this.modulus;
     	
     	return imaginaryPart;
@@ -67,10 +67,6 @@ public class PolarComplex extends ComplexNumber {
 
     public double getArgument() {
     	return this.argument;
-    }
-
-    public boolean isNullComplex() {
-        return this.toRectangular().isNullComplex();
     }
 
     @Override

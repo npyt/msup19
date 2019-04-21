@@ -42,7 +42,9 @@ public abstract class ComplexNumber {
     /**
      * Devuelve <code>true</code> si el complejo es el complejo nulo
      */
-    abstract boolean isNullComplex();
+    public boolean isNullComplex() {
+        return this.toRectangular().isNullComplex();
+    }
 
     @Override
     public String toString() {

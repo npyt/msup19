@@ -1,23 +1,15 @@
 package model;
 
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static junit.framework.TestCase.assertEquals;
+
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 public class ComplexNumberTest {
 
-	private static double DELTA = 1e-15;
-	
-	@Before
-	public void init() {
-		
-	}
-	
-    @Ignore
+    protected static double DELTA = 1e-15;
+
     @Test
     public void testIsNullComplex() {
         ComplexNumber z1 = new RectangularComplex(0, 0);
@@ -29,16 +21,11 @@ public class ComplexNumberTest {
         ComplexNumber z3 = new RectangularComplex(0, -2);
         assertFalse(z3.isNullComplex());
 
-        //TODO tests para forma polar
-    }
+        ComplexNumber z4 = new PolarComplex(0, Math.PI);
+        assertTrue(z4.isNullComplex());
 
-    @Ignore
-    @Test
-    public void testEquals() {
-        ComplexNumber rectangular = new RectangularComplex(1, 1);
-        ComplexNumber polar = new PolarComplex(1, Math.PI / 4);
-
-        assertEquals(rectangular, polar);
+        ComplexNumber z5 = new PolarComplex(2, 0);
+        assertFalse(z5.isNullComplex());
     }
     
 }

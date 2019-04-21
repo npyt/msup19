@@ -101,12 +101,9 @@ public class RectangularComplex extends ComplexNumber {
         return arctan;
     }
 
+    @Override
     public boolean isNullComplex() {
-    	if (this.realPart == 0 && this.imaginaryPart == 0) {
-    		return true;
-    	}else {
-    		return false;
-    	}
+    	return this.realPart == 0 && this.imaginaryPart == 0;
     }
 
     @Override
