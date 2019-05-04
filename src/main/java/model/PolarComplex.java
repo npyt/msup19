@@ -44,8 +44,8 @@ public class PolarComplex extends ComplexNumber {
     }
 
     public ComplexNumber conjugate() {
-        //TODO implementar
-        return null;
+        RectangularComplex conjugate = this.toRectangular().conjugate();
+        return conjugate.toPolar();
     }
 
     RectangularComplex toRectangular() {

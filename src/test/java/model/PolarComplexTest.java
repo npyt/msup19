@@ -152,5 +152,27 @@ public class PolarComplexTest {
         
         assertEquals(subtraction.toPolar().getModulus(), expectedModulus);
     }
+    
+    @Test
+    public void testConjugateArgument() {
+        PolarComplex polar = new PolarComplex(4, (4.0 / 3 ) * Math.PI);
+        
+        ComplexNumber conjugate = polar.conjugate();
+        
+        double expectedArgument = (-1.0 / 3) * Math.PI + Math.PI ;
+        
+        assertEquals(conjugate.toPolar().getArgument(), expectedArgument);
+    }
+    
+    @Test
+    public void testConjugateModulu() {
+    	PolarComplex polar = new PolarComplex(4, (4.0 / 3 ) * Math.PI);
+
+    	ComplexNumber conjugate = polar.conjugate();
+        
+        double expectedModulus = 4;
+        
+        assertEquals(conjugate.toPolar().getModulus(), expectedModulus);
+    }
 }
 
