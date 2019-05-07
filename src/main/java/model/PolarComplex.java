@@ -71,7 +71,7 @@ public class PolarComplex extends ComplexNumber {
     }
     
     /*
-     * Corrige la entrada de un angulo negativo
+     * Corrige la entrada de un argumento fuera del primer giro positivo.
      */
     private double fixArgument(double argument) {
     	if(argument < 0) {
