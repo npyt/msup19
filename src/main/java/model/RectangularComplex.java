@@ -5,8 +5,8 @@ package model;
  */
 public class RectangularComplex extends ComplexNumber {
 
-    private double realPart;
-    private double imaginaryPart;
+    private final double realPart;
+    private final double imaginaryPart;
 
     public RectangularComplex(double realPart, double imaginaryPart) {
         this.realPart = realPart;

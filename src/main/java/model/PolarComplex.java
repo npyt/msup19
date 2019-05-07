@@ -5,8 +5,8 @@ package model;
  */
 public class PolarComplex extends ComplexNumber {
 
-    private double modulus;
-    private double argument;
+    private final double modulus;
+    private final double argument;
 
     public PolarComplex(double modulus, double argument) {
     	this.modulus = modulus;
