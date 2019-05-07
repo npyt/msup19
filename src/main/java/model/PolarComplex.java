@@ -10,19 +10,19 @@ public class PolarComplex extends ComplexNumber {
 
     public PolarComplex(double modulus, double argument) {
     	this.modulus = modulus;
-    	this.argument = fixArgument(argument);
+    	this.argument = this.fixArgument(argument);
     }
 
     public ComplexNumber add(ComplexNumber z) {
     	RectangularComplex thisRectangular = this.toRectangular();
           
-        return thisRectangular.add(z).toPolar();
+        return thisRectangular.add(z);
     }
 
     public ComplexNumber subtract(ComplexNumber z) {
     	RectangularComplex thisRectangular = this.toRectangular();
           
-        return thisRectangular.subtract(z).toPolar();
+        return thisRectangular.subtract(z);
     }
 
     public ComplexNumber multiply(ComplexNumber z) {
@@ -36,16 +36,15 @@ public class PolarComplex extends ComplexNumber {
 
     public ComplexNumber divideBy(ComplexNumber z) {
     	PolarComplex other = z.toPolar();
-    	double newModulus = this.modulus / other.modulus;
-    	double newArgument = this.argument - other.argument;
-    	newArgument = fixArgument(newArgument);
+    	double newModulus = this.modulus / other.getModulus();
+    	double newArgument = this.argument - other.getArgument();
+    	newArgument = this.fixArgument(newArgument);
     	
         return new PolarComplex(newModulus, newArgument);
     }
 
     public ComplexNumber conjugate() {
-        RectangularComplex conjugate = this.toRectangular().conjugate();
-        return conjugate.toPolar();
+        return this.toRectangular().conjugate();
     }
 
     RectangularComplex toRectangular() {

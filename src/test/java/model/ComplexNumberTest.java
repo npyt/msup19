@@ -8,7 +8,7 @@ import static junit.framework.TestCase.assertTrue;
 
 public class ComplexNumberTest {
 
-    protected static double DELTA = 1e-15;
+    protected static double DELTA = 1e-10;
 
     @Test
     public void testIsNullComplex() {

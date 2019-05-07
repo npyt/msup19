@@ -1,7 +1,6 @@
 package model;
 
-import static junit.framework.TestCase.assertEquals;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 public class PolarComplexTest {
@@ -17,7 +16,7 @@ public class PolarComplexTest {
     	
         RectangularComplex rectangularComplex = polarComplex.toRectangular();
         
-        assertEquals(rectangularComplex.getRealPart(), expectedRealPart, ComplexNumberTest.DELTA);
+        Assert.assertEquals(rectangularComplex.getRealPart(), expectedRealPart, ComplexNumberTest.DELTA);
     }
     
     @Test
@@ -31,7 +30,7 @@ public class PolarComplexTest {
     	
         RectangularComplex rectangularComplex = polarComplex.toRectangular();
         
-        assertEquals(rectangularComplex.getImaginaryPart(), expectedImaginaryPart, ComplexNumberTest.DELTA);
+        Assert.assertEquals(rectangularComplex.getImaginaryPart(), expectedImaginaryPart, ComplexNumberTest.DELTA);
     }
     
     @Test
@@ -48,8 +47,8 @@ public class PolarComplexTest {
     	PolarComplex otherPolarComplex = new PolarComplex(otherModulus, otherArgument);
     	
     	ComplexNumber newComplex = polarComplex.multiply(otherPolarComplex);
-        
-        assertEquals(newComplex.toPolar().getModulus(), expectedComplex.toPolar().getModulus());
+
+        Assert.assertEquals(newComplex.toPolar().getModulus(), expectedComplex.toPolar().getModulus(), ComplexNumberTest.DELTA);
     }
     
     @Test
@@ -66,8 +65,10 @@ public class PolarComplexTest {
     	PolarComplex otherPolarComplex = new PolarComplex(otherModulus, otherArgument);
     	
     	ComplexNumber newComplex = polarComplex.multiply(otherPolarComplex);
-        
-    	assertEquals(newComplex.toPolar().getArgument(), expectedComplex.toPolar().getArgument(), ComplexNumberTest.DELTA);
+
+        double expected = newComplex.toPolar().getArgument();
+        double actual = expectedComplex.toPolar().getArgument();
+        Assert.assertEquals(expected, actual, ComplexNumberTest.DELTA);
     }
     
     @Test
@@ -84,8 +85,10 @@ public class PolarComplexTest {
     	PolarComplex otherPolarComplex = new PolarComplex(otherModulus, otherArgument);
     	
     	ComplexNumber newComplex = polarComplex.divideBy(otherPolarComplex);
-        
-        assertEquals(newComplex.toPolar().getModulus(), expectedComplex.toPolar().getModulus());
+
+        double actual = newComplex.toPolar().getModulus();
+        double expected = expectedComplex.toPolar().getModulus();
+        Assert.assertEquals(expected, actual, ComplexNumberTest.DELTA);
     }
     
     @Test
@@ -102,8 +105,9 @@ public class PolarComplexTest {
     	PolarComplex otherPolarComplex = new PolarComplex(otherModulus, otherArgument);
     	
     	ComplexNumber newComplex = polarComplex.divideBy(otherPolarComplex);
-        
-    	assertEquals(newComplex.toPolar().getArgument(), expectedComplex.toPolar().getArgument(), ComplexNumberTest.DELTA);
+        double actual = newComplex.toPolar().getArgument();
+        double expected = expectedComplex.toPolar().getArgument();
+        Assert.assertEquals(expected, actual, ComplexNumberTest.DELTA);
     }
     
     @Test  
@@ -114,10 +118,12 @@ public class PolarComplexTest {
         ComplexNumber addition = somePolar.add(otherPolar);
         
         double expectedArgument = Math.atan(8.0/3) + Math.PI;
-        
-        assertEquals(addition.toPolar().getArgument(), expectedArgument);
+
+        double actualArgument = addition.toPolar().getArgument();
+        Assert.assertEquals(expectedArgument, actualArgument, ComplexNumberTest.DELTA);
     }
-    
+
+    @Test
     public void testAddPolarModulus() {
         PolarComplex somePolar = new PolarComplex(8, (3.0 / 2 ) * Math.PI);
         PolarComplex otherPolar = new PolarComplex(3, Math.PI);
@@ -125,8 +131,10 @@ public class PolarComplexTest {
         ComplexNumber addition = somePolar.add(otherPolar);
         
         double expectedModulus = Math.pow(73, 0.5);
-        
-        assertEquals(addition.toPolar().getModulus(), expectedModulus);
+        double actual = addition.toPolar().getModulus();
+
+        System.out.println(Math.abs(expectedModulus - actual));
+        Assert.assertEquals(expectedModulus, actual, ComplexNumberTest.DELTA);
     }
 
     @Test
@@ -137,8 +145,9 @@ public class PolarComplexTest {
         ComplexNumber subtraction = somePolar.subtract(otherPolar);
         
         double expectedArgument = 2 * Math.PI + Math.atan(-8.0/3) ;
-        
-        assertEquals(subtraction.toPolar().getArgument(), expectedArgument);
+
+        double actualArgument = subtraction.toPolar().getArgument();
+        Assert.assertEquals(expectedArgument, actualArgument, ComplexNumberTest.DELTA);
     }
     
     @Test
@@ -149,8 +158,9 @@ public class PolarComplexTest {
         ComplexNumber subtraction = somePolar.subtract(otherPolar);
         
         double expectedModulus = Math.pow(73, 0.5);
-        
-        assertEquals(subtraction.toPolar().getModulus(), expectedModulus);
+
+        double actualModulus = subtraction.toPolar().getModulus();
+        Assert.assertEquals(expectedModulus, actualModulus, ComplexNumberTest.DELTA);
     }
     
     @Test
@@ -160,19 +170,21 @@ public class PolarComplexTest {
         ComplexNumber conjugate = polar.conjugate();
         
         double expectedArgument = (-1.0 / 3) * Math.PI + Math.PI ;
-        
-        assertEquals(conjugate.toPolar().getArgument(), expectedArgument);
+
+        double actualArgument = conjugate.toPolar().getArgument();
+        Assert.assertEquals(expectedArgument, actualArgument, ComplexNumberTest.DELTA);
     }
     
     @Test
-    public void testConjugateModulu() {
+    public void testConjugateModulus() {
     	PolarComplex polar = new PolarComplex(4, (4.0 / 3 ) * Math.PI);
 
     	ComplexNumber conjugate = polar.conjugate();
         
         double expectedModulus = 4;
-        
-        assertEquals(conjugate.toPolar().getModulus(), expectedModulus);
+
+        double actualModulus = conjugate.toPolar().getModulus();
+        Assert.assertEquals(expectedModulus, actualModulus, ComplexNumberTest.DELTA);
     }
 }
 
