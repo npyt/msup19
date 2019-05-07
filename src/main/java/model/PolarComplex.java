@@ -10,41 +10,7 @@ public class PolarComplex extends ComplexNumber {
 
     public PolarComplex(double modulus, double argument) {
     	this.modulus = modulus;
-    	this.argument = this.fixArgument(argument);
-    }
-
-    public ComplexNumber add(ComplexNumber z) {
-    	RectangularComplex thisRectangular = this.toRectangular();
-          
-        return thisRectangular.add(z);
-    }
-
-    public ComplexNumber subtract(ComplexNumber z) {
-    	RectangularComplex thisRectangular = this.toRectangular();
-          
-        return thisRectangular.subtract(z);
-    }
-
-    public ComplexNumber multiply(ComplexNumber z) {
-    	PolarComplex other = z.toPolar();
-    	
-    	double newModulus = this.modulus * other.modulus;
-    	double newArgument = this.argument + other.argument;
-    	
-        return new PolarComplex(newModulus, newArgument);
-    }
-
-    public ComplexNumber divideBy(ComplexNumber z) {
-    	PolarComplex other = z.toPolar();
-    	double newModulus = this.modulus / other.getModulus();
-    	double newArgument = this.argument - other.getArgument();
-    	newArgument = this.fixArgument(newArgument);
-    	
-        return new PolarComplex(newModulus, newArgument);
-    }
-
-    public ComplexNumber conjugate() {
-        return this.toRectangular().conjugate();
+    	this.argument = fixArgument(argument);
     }
 
     RectangularComplex toRectangular() {
@@ -59,23 +25,21 @@ public class PolarComplex extends ComplexNumber {
     }
     
     private double calculateRealPart() {
-    	double realPart = Math.cos(this.argument) * this.modulus;
-    	
+    	double realPart = Math.cos(this.argument) * this.modulus;    	
     	return realPart;
     }
     
     private double calculateImaginaryPart() {
-    	double imaginaryPart = Math.sin(this.argument) * this.modulus;
-    	
+    	double imaginaryPart = Math.sin(this.argument) * this.modulus;    	
     	return imaginaryPart;
     }
     
     /*
      * Corrige la entrada de un argumento fuera del primer giro positivo.
      */
-    private double fixArgument(double argument) {
+    public static double fixArgument(double argument) {
     	if(argument < 0) {
-    		return this.fixArgument(Math.PI * 2 + argument);
+    		return fixArgument(Math.PI * 2 + argument);
     	}
 
     	if(argument > Math.PI * 2) {

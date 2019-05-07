@@ -5,29 +5,65 @@ public abstract class ComplexNumber {
     /**
      * Suma de complejos
      */
-    abstract ComplexNumber add(ComplexNumber z);
+    ComplexNumber add(ComplexNumber z) {
+    	RectangularComplex rectangularT = this.toRectangular();
+        RectangularComplex rectangularZ = z.toRectangular();
+
+        double realPartAddition = rectangularT.getRealPart() + rectangularZ.getRealPart();
+        double imaginaryPartAddition = rectangularT.getImaginaryPart() + rectangularZ.getImaginaryPart();
+
+        return new RectangularComplex(realPartAddition, imaginaryPartAddition);
+    }
 
     /**
      * Resta de complejos.
      * @param z sustraendo
      */
-    abstract ComplexNumber subtract(ComplexNumber z);
+    ComplexNumber subtract(ComplexNumber z) {
+    	RectangularComplex rectangularT = this.toRectangular();
+        RectangularComplex rectangularZ = z.toRectangular();
+
+        double realPartAddition = rectangularT.getRealPart() - rectangularZ.getRealPart();
+        double imaginaryPartAddition = rectangularT.getImaginaryPart() - rectangularZ.getImaginaryPart();
+
+        return new RectangularComplex(realPartAddition, imaginaryPartAddition);
+    }
 
     /**
      * Multiplicacion de complejos
      */
-    abstract ComplexNumber multiply(ComplexNumber z);
+    ComplexNumber multiply(ComplexNumber z) {
+    	PolarComplex thisp = this.toPolar();
+    	PolarComplex other = z.toPolar();
+    	
+    	double newModulus = thisp.getModulus() * other.getModulus();
+    	double newArgument = thisp.getArgument() + other.getArgument();
+    	
+        return new PolarComplex(newModulus, newArgument);
+    }
 
     /**
      * Cociente de complejos
      * @param z divisor
      */
-    abstract ComplexNumber divideBy(ComplexNumber z);
+    ComplexNumber divideBy(ComplexNumber z) {
+    	PolarComplex thisp = this.toPolar();
+    	PolarComplex other = z.toPolar();
+    	
+    	double newModulus = thisp.getModulus() / other.getModulus();
+    	double newArgument = thisp.getArgument() - other.getArgument();
+    	newArgument = PolarComplex.fixArgument(newArgument);
+    	
+        return new PolarComplex(newModulus, newArgument);
+    }
 
     /**
      * Devuelve el conjugado de esta instancia
      */
-    abstract ComplexNumber conjugate();
+    ComplexNumber conjugate() {
+    	RectangularComplex thisRectangular = this.toRectangular();
+        return new RectangularComplex(thisRectangular.getRealPart(), - thisRectangular.getImaginaryPart());
+    }
 
     /**
      * Devuelve el equivalente al complejo en forma binomial

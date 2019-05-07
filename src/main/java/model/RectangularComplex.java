@@ -13,36 +13,6 @@ public class RectangularComplex extends ComplexNumber {
         this.imaginaryPart = imaginaryPart;
     }
 
-    public ComplexNumber add(ComplexNumber z) {
-        RectangularComplex rectangularZ = z.toRectangular();
-
-        double realPartAddition = this.realPart + rectangularZ.getRealPart();
-        double imaginaryPartAddition = this.imaginaryPart + rectangularZ.getImaginaryPart();
-
-        return new RectangularComplex(realPartAddition, imaginaryPartAddition);
-    }
-
-    public ComplexNumber subtract(ComplexNumber z) {
-        RectangularComplex rectangularZ = z.toRectangular();
-
-        double realPartSubtraction = this.realPart - rectangularZ.getRealPart();
-        double imaginaryPartSubtraction = this.imaginaryPart - rectangularZ.getImaginaryPart();
-
-        return new RectangularComplex(realPartSubtraction, imaginaryPartSubtraction);
-    }
-
-    public ComplexNumber multiply(ComplexNumber z) {
-        PolarComplex polarComplex = this.toPolar();
-
-        return polarComplex.multiply(z);
-    }
-
-    public ComplexNumber divideBy(ComplexNumber z) {
-        PolarComplex polarComplex = this.toPolar();
-
-        return polarComplex.divideBy(z);
-    }
-
     public PolarComplex toPolar() {
         double modulus = this.calculateModulus();
         double argument = this.calculateArgument();
@@ -52,10 +22,6 @@ public class RectangularComplex extends ComplexNumber {
 
     public RectangularComplex toRectangular() {
         return this;
-    }
-
-    public RectangularComplex conjugate() {
-        return new RectangularComplex(this.realPart, - this.imaginaryPart);
     }
 
     public double getImaginaryPart() {

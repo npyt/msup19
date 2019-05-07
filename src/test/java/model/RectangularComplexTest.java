@@ -75,7 +75,7 @@ public class RectangularComplexTest {
     @Test
     public void testConjugate() {
         RectangularComplex rectangularComplex = new RectangularComplex(4, -1);
-        RectangularComplex conjugate = rectangularComplex.conjugate();
+        RectangularComplex conjugate = (RectangularComplex) rectangularComplex.conjugate();
 
         assertEquals(new RectangularComplex(4, 1), conjugate);
     }
