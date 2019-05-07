@@ -52,7 +52,6 @@ public abstract class ComplexNumber {
     	
     	double newModulus = thisp.getModulus() / other.getModulus();
     	double newArgument = thisp.getArgument() - other.getArgument();
-    	newArgument = PolarComplex.fixArgument(newArgument);
     	
         return new PolarComplex(newModulus, newArgument);
     }

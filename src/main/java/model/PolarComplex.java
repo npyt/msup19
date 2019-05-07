@@ -37,7 +37,7 @@ public class PolarComplex extends ComplexNumber {
     /*
      * Corrige la entrada de un argumento fuera del primer giro positivo.
      */
-    public static double fixArgument(double argument) {
+    private double fixArgument(double argument) {
     	if(argument < 0) {
     		return fixArgument(Math.PI * 2 + argument);
     	}
