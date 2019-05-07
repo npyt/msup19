@@ -10,32 +10,42 @@ public class PolarComplex extends ComplexNumber {
 
     public PolarComplex(double modulus, double argument) {
     	this.modulus = modulus;
-        this.argument = argument;
+    	this.argument = fixArgument(argument);
     }
 
     public ComplexNumber add(ComplexNumber z) {
-        //TODO implementar
-        return null;
+    	RectangularComplex thisRectangular = this.toRectangular();
+          
+        return thisRectangular.add(z).toPolar();
     }
 
     public ComplexNumber subtract(ComplexNumber z) {
-        //TODO implementar
-        return null;
+    	RectangularComplex thisRectangular = this.toRectangular();
+          
+        return thisRectangular.subtract(z).toPolar();
     }
 
     public ComplexNumber multiply(ComplexNumber z) {
-        //TODO implementar
-        return null;
+    	PolarComplex other = z.toPolar();
+    	
+    	double newModulus = this.modulus * other.modulus;
+    	double newArgument = this.argument + other.argument;
+    	
+        return new PolarComplex(newModulus, newArgument);
     }
 
     public ComplexNumber divideBy(ComplexNumber z) {
-        //TODO implementar
-        return null;
+    	PolarComplex other = z.toPolar();
+    	double newModulus = this.modulus / other.modulus;
+    	double newArgument = this.argument - other.argument;
+    	newArgument = fixArgument(newArgument);
+    	
+        return new PolarComplex(newModulus, newArgument);
     }
 
     public ComplexNumber conjugate() {
-        //TODO implementar
-        return null;
+        RectangularComplex conjugate = this.toRectangular().conjugate();
+        return conjugate.toPolar();
     }
 
     RectangularComplex toRectangular() {
@@ -59,6 +69,16 @@ public class PolarComplex extends ComplexNumber {
     	double imaginaryPart = Math.sin(this.argument) * this.modulus;
     	
     	return imaginaryPart;
+    }
+    
+    /*
+     * Corrige la entrada de un angulo negativo
+     */
+    private double fixArgument(double argument) {
+    	if(argument<0) {
+    		argument = Math.PI * 2 + argument;
+    	}
+    	return argument;
     }
 
     public double getModulus() {
