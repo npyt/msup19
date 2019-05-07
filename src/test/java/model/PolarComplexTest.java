@@ -186,5 +186,35 @@ public class PolarComplexTest {
         double actualModulus = conjugate.toPolar().getModulus();
         Assert.assertEquals(expectedModulus, actualModulus, ComplexNumberTest.DELTA);
     }
+
+    @Test
+    public void fixArgumentLessThan0() {
+	    PolarComplex needsFix = new PolarComplex(2, -Math.PI);
+	    PolarComplex expected = new PolarComplex(2, Math.PI);
+
+	    double needsFixArgument = needsFix.getArgument();
+	    double expectedArgument = expected.getArgument();
+	    Assert.assertEquals(expectedArgument, needsFixArgument, ComplexNumberTest.DELTA);
+    }
+
+    @Test
+    public void fixArgumentMuchLessThan0() {
+        PolarComplex needsFix = new PolarComplex(2, -5 * Math.PI);
+        PolarComplex expected = new PolarComplex(2, Math.PI);
+
+        double needsFixArgument = needsFix.getArgument();
+        double expectedArgument = expected.getArgument();
+        Assert.assertEquals(expectedArgument, needsFixArgument, ComplexNumberTest.DELTA);
+    }
+
+    @Test
+    public void fixArgumentGreaterThan2Pi() {
+	    PolarComplex needsFix = new PolarComplex(3, 5 * Math.PI);
+	    PolarComplex expected = new PolarComplex(3, Math.PI);
+
+        double needsFixArgument = needsFix.getArgument();
+        double expectedArgument = expected.getArgument();
+        Assert.assertEquals(expectedArgument, needsFixArgument, ComplexNumberTest.DELTA);
+    }
 }
 

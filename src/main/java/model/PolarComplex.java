@@ -74,9 +74,14 @@ public class PolarComplex extends ComplexNumber {
      * Corrige la entrada de un angulo negativo
      */
     private double fixArgument(double argument) {
-    	if(argument<0) {
-    		argument = Math.PI * 2 + argument;
+    	if(argument < 0) {
+    		return this.fixArgument(Math.PI * 2 + argument);
     	}
+
+    	if(argument > Math.PI * 2) {
+    	    argument = argument % (Math.PI * 2);
+        }
+
     	return argument;
     }
 
