@@ -13,14 +13,14 @@ public class PolarComplex extends ComplexNumber {
         this.argument = fixArgument(argument);
     }
 
-    RectangularComplex toRectangular() {
+    public RectangularComplex toRectangular() {
         double realPart = this.calculateRealPart();
         double imaginaryPart = this.calculateImaginaryPart();
 
         return new RectangularComplex(realPart, imaginaryPart);
     }
 
-    PolarComplex toPolar() {
+    public PolarComplex toPolar() {
         return this;
     }
 

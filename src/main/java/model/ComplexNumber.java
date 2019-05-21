@@ -119,12 +119,12 @@ public abstract class ComplexNumber {
     /**
      * Devuelve el equivalente al complejo en forma binomial
      */
-    abstract RectangularComplex toRectangular();
+    public abstract RectangularComplex toRectangular();
 
     /**
      * Devuelve el equivalente al complejo en forma polar
      */
-    abstract PolarComplex toPolar();
+    public abstract PolarComplex toPolar();
 
     /**
      * Devuelve <code>true</code> si el complejo es el complejo nulo

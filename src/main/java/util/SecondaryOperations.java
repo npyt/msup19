@@ -21,7 +21,7 @@ public final class SecondaryOperations {
 
         List<ComplexNumber> primitiveRoots = new ArrayList<ComplexNumber>();
 
-        for (int k = 0; k < index; k++) {
+        for (int k = 1; k < index; k++) {
             if (gcd(k, index) == 1) {
                 ComplexNumber primitiveRoot = unityRoots.get(k);
                 primitiveRoots.add(primitiveRoot);
