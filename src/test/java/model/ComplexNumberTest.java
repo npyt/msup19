@@ -2,7 +2,6 @@ package model;
 
 import org.junit.Test;
 
-
 import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
@@ -27,5 +26,5 @@ public class ComplexNumberTest {
         ComplexNumber z5 = new PolarComplex(2, 0);
         assertFalse(z5.isNullComplex());
     }
-    
+
 }

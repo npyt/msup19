@@ -41,34 +41,34 @@ public class RectangularComplexTest {
         RectangularComplex rectangularComplex = new RectangularComplex(3, 3);
         PolarComplex polar = rectangularComplex.toPolar();
 
-        PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (1.0/4) * Math.PI);
+        PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (1.0 / 4) * Math.PI);
         assertEquals(expectedPolar.getArgument(), polar.getArgument());
     }
-    
+
     @Test
     public void toPolar2ndQuadrantArgument() {
         RectangularComplex rectangularComplex = new RectangularComplex(-3, 3);
         PolarComplex polar = rectangularComplex.toPolar();
 
-        PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (3.0/4) * Math.PI);
+        PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (3.0 / 4) * Math.PI);
         assertEquals(expectedPolar.getArgument(), polar.getArgument());
     }
-    
+
     @Test
     public void toPolar3thQuadrantArgument() {
         RectangularComplex rectangularComplex = new RectangularComplex(-3, -3);
         PolarComplex polar = rectangularComplex.toPolar();
 
-        PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (5.0/4) * Math.PI);
+        PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (5.0 / 4) * Math.PI);
         assertEquals(expectedPolar.getArgument(), polar.getArgument());
     }
-    
+
     @Test
     public void toPolar4thQuadrantArgument() {
         RectangularComplex rectangularComplex = new RectangularComplex(3, -3);
         PolarComplex polar = rectangularComplex.toPolar();
 
-        PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (7.0/4) * Math.PI);
+        PolarComplex expectedPolar = new PolarComplex(3 * Math.sqrt(2), (7.0 / 4) * Math.PI);
         assertEquals(expectedPolar.getArgument(), polar.getArgument());
     }
 

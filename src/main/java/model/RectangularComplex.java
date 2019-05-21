@@ -33,43 +33,43 @@ public class RectangularComplex extends ComplexNumber {
     }
 
     private double calculateModulus() {
-        if(this.isNullComplex()) {
+        if (this.isNullComplex()) {
             return 0.0;
         }
-        
+
         double modulusSquared = this.realPart * this.realPart + this.imaginaryPart * this.imaginaryPart;
         return Math.sqrt(modulusSquared);
     }
 
     private double calculateArgument() {
-        if(this.realPart == 0) {
-            if(this.imaginaryPart > 0) {
+        if (this.realPart == 0) {
+            if (this.imaginaryPart > 0) {
                 return Math.PI / 2.0;
             }
-            if(this.imaginaryPart < 0) {
+            if (this.imaginaryPart < 0) {
                 return Math.PI / -2.0;
-            }       
-            
+            }
+
             return 0;
         }
 
         double arctan = Math.atan(this.imaginaryPart / this.realPart);
-        
+
         // Corrijo cuadrante equivalente y giro en el 4to cuadrante
-        
-        if((this.realPart < 0 && this.imaginaryPart > 0 && arctan < 0)  
-        	|| this.realPart < 0 && this.imaginaryPart < 0 && arctan > 0){
+
+        if ((this.realPart < 0 && this.imaginaryPart > 0 && arctan < 0)
+                || this.realPart < 0 && this.imaginaryPart < 0 && arctan > 0) {
             arctan += Math.PI;
-        }else if (this.realPart > 0 && this.imaginaryPart < 0 && arctan < 0) {
-        	arctan = (2.0 * Math.PI) + arctan;
+        } else if (this.realPart > 0 && this.imaginaryPart < 0 && arctan < 0) {
+            arctan = (2.0 * Math.PI) + arctan;
         }
-        
+
         return arctan;
     }
 
     @Override
     public boolean isNullComplex() {
-    	return this.realPart == 0 && this.imaginaryPart == 0;
+        return this.realPart == 0 && this.imaginaryPart == 0;
     }
 
     @Override
