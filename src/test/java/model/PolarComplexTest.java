@@ -246,7 +246,7 @@ public class PolarComplexTest {
 
     @Test(expected = ArithmeticException.class)
     public void testRootInvalidIndex() {
-        new PolarComplex(1, Math.PI).root(-1);
+        new PolarComplex(1, Math.PI).roots(-1);
     }
 
     @Test
@@ -254,7 +254,7 @@ public class PolarComplexTest {
         PolarComplex radicand = new PolarComplex(8, 3 * Math.PI / 2);
         int index = 3;
 
-        List<ComplexNumber> results = radicand.root(index);
+        List<ComplexNumber> results = radicand.roots(index);
         int size = results.size();
         Assert.assertEquals(3, size);
     }
@@ -264,7 +264,7 @@ public class PolarComplexTest {
         PolarComplex radicand = new PolarComplex(8, 3 * Math.PI / 2);
         int index = 3;
 
-        List<ComplexNumber> results = radicand.root(index);
+        List<ComplexNumber> results = radicand.roots(index);
         PolarComplex firstResult = results.get(0).toPolar();
 
         double expected = Math.PI / 2;
@@ -277,7 +277,7 @@ public class PolarComplexTest {
         PolarComplex radicand = new PolarComplex(8, 3 * Math.PI / 2);
         int index = 3;
 
-        List<ComplexNumber> results = radicand.root(index);
+        List<ComplexNumber> results = radicand.roots(index);
         PolarComplex firstResult = results.get(1).toPolar();
 
         double expected = Math.pow(8, 1D / 3D);

@@ -8,7 +8,7 @@ public abstract class ComplexNumber {
     /**
      * Suma de complejos
      */
-    ComplexNumber add(ComplexNumber z) {
+    public ComplexNumber add(ComplexNumber z) {
         RectangularComplex rectangularT = this.toRectangular();
         RectangularComplex rectangularZ = z.toRectangular();
 
@@ -23,7 +23,7 @@ public abstract class ComplexNumber {
      *
      * @param z sustraendo
      */
-    ComplexNumber subtract(ComplexNumber z) {
+    public ComplexNumber subtract(ComplexNumber z) {
         RectangularComplex rectangularT = this.toRectangular();
         RectangularComplex rectangularZ = z.toRectangular();
 
@@ -36,7 +36,7 @@ public abstract class ComplexNumber {
     /**
      * Multiplicacion de complejos
      */
-    ComplexNumber multiply(ComplexNumber z) {
+    public ComplexNumber multiply(ComplexNumber z) {
         PolarComplex thisp = this.toPolar();
         PolarComplex other = z.toPolar();
 
@@ -51,7 +51,7 @@ public abstract class ComplexNumber {
      *
      * @param z divisor
      */
-    ComplexNumber divideBy(ComplexNumber z) {
+    public ComplexNumber divideBy(ComplexNumber z) {
         PolarComplex thisp = this.toPolar();
         PolarComplex other = z.toPolar();
 
@@ -67,7 +67,7 @@ public abstract class ComplexNumber {
      * @param n exponente natural ó 0.
      * @throws ArithmeticException si el exponente es inválido.
      */
-    ComplexNumber power(int n) {
+    public ComplexNumber power(int n) {
         if (n < 0) {
             throw new ArithmeticException("El exponente debe ser natural ó 0, pero se ingresó " + n);
         }
@@ -88,7 +88,7 @@ public abstract class ComplexNumber {
      * @param n índice natural.
      * @throws ArithmeticException si el índice es inválido.
      */
-    List<ComplexNumber> root(int n) {
+    public List<ComplexNumber> roots(int n) {
         if (n <= 0) {
             throw new ArithmeticException("El índice debe ser natural, pero se ingresó " + n);
         }
@@ -111,7 +111,7 @@ public abstract class ComplexNumber {
     /**
      * Devuelve el conjugado de esta instancia
      */
-    ComplexNumber conjugate() {
+    public ComplexNumber conjugate() {
         RectangularComplex thisRectangular = this.toRectangular();
         return new RectangularComplex(thisRectangular.getRealPart(), -thisRectangular.getImaginaryPart());
     }
