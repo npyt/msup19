@@ -65,11 +65,11 @@ public abstract class ComplexNumber {
      * Potencia
      *
      * @param n exponente natural ó 0.
-     * @throws ArithmeticException si el exponente es inválido.
+     * @throws IllegalArgumentException si el exponente es inválido.
      */
     public ComplexNumber power(int n) {
         if (n < 0) {
-            throw new ArithmeticException("El exponente debe ser natural ó 0, pero se ingresó " + n);
+            throw new IllegalArgumentException("El exponente debe ser natural ó 0, pero se ingresó " + n);
         }
 
         PolarComplex polar = this.toPolar();
@@ -86,11 +86,11 @@ public abstract class ComplexNumber {
      * Radicación. Devuelve una lista ordenada de los resultados, de menor a mayor argumento.
      *
      * @param n índice natural.
-     * @throws ArithmeticException si el índice es inválido.
+     * @throws IllegalArgumentException si el índice es inválido.
      */
     public List<ComplexNumber> roots(int n) {
         if (n <= 0) {
-            throw new ArithmeticException("El índice debe ser natural, pero se ingresó " + n);
+            throw new IllegalArgumentException("El índice debe ser natural, pero se ingresó " + n);
         }
 
         PolarComplex polar = this.toPolar();

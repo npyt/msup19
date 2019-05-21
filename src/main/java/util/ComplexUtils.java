@@ -8,14 +8,19 @@ import java.util.List;
 
 import static org.apache.commons.math3.util.ArithmeticUtils.gcd;
 
-public final class SecondaryOperations {
+public final class ComplexUtils {
 
     /**
      * Dado un índice, devuelve sus raíces primitivas de la unidad.
      *
      * @param index - índice natural.
+     * @throws IllegalArgumentException si el índice es inválido.
      */
     public static List<ComplexNumber> primitiveRoots(int index) {
+        if(index <= 0) {
+            throw new IllegalArgumentException("Índice inválido: " + index);
+        }
+
         ComplexNumber numberOne = new PolarComplex(1, 0);
         List<ComplexNumber> unityRoots = numberOne.roots(index);
 

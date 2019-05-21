@@ -219,7 +219,7 @@ public class PolarComplexTest {
         Assert.assertEquals(expectedArgument, needsFixArgument, ComplexNumberTest.DELTA);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testPowerInvalidExponent() {
         new PolarComplex(1, Math.PI).power(-1);
     }
@@ -244,7 +244,7 @@ public class PolarComplexTest {
         Assert.assertEquals(256, polarResult.getModulus(), ComplexNumberTest.DELTA);
     }
 
-    @Test(expected = ArithmeticException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testRootInvalidIndex() {
         new PolarComplex(1, Math.PI).roots(-1);
     }
