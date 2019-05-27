@@ -1,4 +1,4 @@
-package model;
+package backend.model;
 
 /**
  * Representa la forma polar de un complejo

@@ -1,7 +1,7 @@
-package util;
+package backend.util;
 
-import model.ComplexNumber;
-import model.PolarComplex;
+import backend.model.ComplexNumber;
+import backend.model.PolarComplex;
 
 import java.util.ArrayList;
 import java.util.List;

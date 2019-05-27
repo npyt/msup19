@@ -1,4 +1,4 @@
-package model;
+package backend.model;
 
 /**
  * Representa la forma binomial de un complejo

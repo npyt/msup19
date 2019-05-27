@@ -1,4 +1,4 @@
-package model;
+package backend.model;
 
 import org.junit.Test;
 

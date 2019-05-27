@@ -1,8 +1,8 @@
-package util;
+package backend.util;
 
-import model.ComplexNumber;
-import model.ComplexNumberTest;
-import model.PolarComplex;
+import backend.model.ComplexNumber;
+import backend.model.ComplexNumberTest;
+import backend.model.PolarComplex;
 import org.junit.Assert;
 import org.junit.Test;
 
