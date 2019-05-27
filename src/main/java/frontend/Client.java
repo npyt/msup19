@@ -8,8 +8,6 @@ import java.awt.*;
 
 public class Client extends JFrame {
 
-    private static final String SUM_OPERATION_NAME = "Sumar complejos";
-
     public Client() {
         super("nCom");
         this.createPanel();
