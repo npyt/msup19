@@ -17,11 +17,11 @@ public class Phasor {
     ;
 
     private double frecuencia;
-    private double fase;
+	private double fase;
     private double amplitud;
     private TrigFun funcion;
 
-    public Phasor(double frecuencia, double fase, double amplitud, TrigFun funcion) {
+    public Phasor(double amplitud, TrigFun funcion, double frecuencia, double fase) {
         this.frecuencia = frecuencia;
         this.fase = fase;
         this.amplitud = amplitud;
@@ -45,18 +45,83 @@ public class Phasor {
     PolarComplex toPolar() {
         return new PolarComplex(amplitud, fase);
     }
+    
+    RectangularComplex toRectangular() {
+        return this.toPolar().toRectangular(); //xd
+    }   
+    
 
-    Phasor add(Phasor otroFasor) {
+    Phasor add(Phasor otroFasor) {// throws Exception {
+//    	if (this.frecuencia != otroFasor.frecuencia) {
+//    		throw new Exception("Los dos fasores deben tener la misma frecuencia para sumarlos");
+//    	}
+    	
         this.toSIN();
         otroFasor.toSIN();
 
-        //los paso a polares y lo sumo
-        PolarComplex sumaDePolares = this.toPolar()
-                .add(otroFasor.toPolar())
-                .toPolar();
+        //los paso a binomica y sumamos
+        ComplexNumber sumaDeBinomicos = 
+        		this.toRectangular()
+        		.add(otroFasor.toRectangular());
+        
+        //lo paso a exponencial
+         PolarComplex polar = sumaDeBinomicos.toPolar(); 
 
-        return new Phasor(this.frecuencia, sumaDePolares.getArgument(), sumaDePolares.getModulus(), TrigFun.SIN);
+        return new Phasor(polar.getModulus(), TrigFun.SIN, this.frecuencia, polar.getArgument());
     }
+    
+    Boolean equals(Phasor otroFasor) {
+    	this.toSIN();
+    	otroFasor.toSIN();
+    	
+    	return this.amplitud == otroFasor.amplitud &&
+    			this.fase == otroFasor.fase &&
+    			this.frecuencia == otroFasor.frecuencia;
+    }
+    
+    public String toString() {
+    	String signo = "+";
+    	if(this.fase<0) {signo = "";}
+        return String.valueOf(this.amplitud) + 
+        		String.valueOf(this.funcion) +
+        		"("+ this.frecuencia+"t"+signo+this.fase+")";
+    }
+
+    
+    //Getters y Setters
+    
+    public double getFrecuencia() {
+		return frecuencia;
+	}
+
+	public void setFrecuencia(double frecuencia) {
+		this.frecuencia = frecuencia;
+	}
+
+	public double getFase() {
+		return fase;
+	}
+
+	public void setFase(double fase) {
+		this.fase = fase;
+	}
+
+	public double getAmplitud() {
+		return amplitud;
+	}
+
+	public void setAmplitud(double amplitud) {
+		this.amplitud = amplitud;
+	}
+
+	public TrigFun getFuncion() {
+		return funcion;
+	}
+
+	public void setFuncion(TrigFun funcion) {
+		this.funcion = funcion;
+	}
+    
 
 
 // f(t) = A.sen(w t + faseInicial)
