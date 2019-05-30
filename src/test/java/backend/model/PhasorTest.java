@@ -37,13 +37,29 @@ public class PhasorTest {
     
     }
 	
-	@Test(expected = Exception.class)
+	@Test
+    public void testSINtoCOS() throws Exception {
+		
+		Phasor v2 = new Phasor(5,TrigFun.SIN,4,fasev2);
+		
+		v2.toCOS();
+        
+        Assert.assertEquals(5,v2.getAmplitud(), this.DELTA);
+        Assert.assertEquals(Math.PI/12.00, v2.getFase(), this.DELTA);
+        Assert.assertEquals(TrigFun.COS, v2.getFuncion());
+    
+    }
+	
+	@Test
     public void testSumaDeFasoresDistintaFuncion() throws Exception {
 		
 		Phasor v1 = new Phasor(10,TrigFun.COS,4,fasev1);
 		Phasor v2 = new Phasor(5,TrigFun.SIN,4,fasev2);
-
-        v1.add(v2);
+		
+		Phasor resultado = v1.add(v2);
+        
+        Assert.assertEquals(12.28,resultado.getAmplitud(), this.DELTA);
+        Assert.assertEquals(5.64, resultado.getFase(), this.DELTA);
     
     }
 	

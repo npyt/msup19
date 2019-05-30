@@ -30,14 +30,14 @@ public class Phasor {
 
     void toSIN() {
         if (this.funcion == TrigFun.COS) {
-            this.fase += (Math.PI / 2.0);
+            this.fase = (Math.PI / 2.0) - this.fase;
             this.funcion = TrigFun.SIN;
         }
     }
 
     void toCOS() {
         if (this.funcion == TrigFun.SIN) {
-            this.fase -= (Math.PI / 2.0);
+            this.fase =  (Math.PI / 2.0) - this.fase;
             this.funcion = TrigFun.COS;
         }
     }
@@ -57,11 +57,10 @@ public class Phasor {
     	}
     	
     	if (this.funcion != otroFasor.funcion) {
-    		throw new Exception("Los dos fasores deben tener la misma funcion para sumarlos");
+    		this.toCOS();
+    		otroFasor.toCOS();
     	}
     	
-        //this.toSIN();
-        //otroFasor.toSIN();
 
         //los paso a binomica y sumamos
         ComplexNumber sumaDeBinomicos = 
