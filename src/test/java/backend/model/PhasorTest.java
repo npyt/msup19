@@ -10,15 +10,15 @@ public class PhasorTest {
 
 	@Test
     public void testSumaDeFasores() {
-		
-		Phasor v1 = new Phasor(10,TrigFun.COS,3,(-1/3)*Math.PI);
-		Phasor v2 = new Phasor(5,TrigFun.COS,3,(5/12)*Math.PI);
+
+		Phasor v1 = new Phasor(10,TrigFun.COS,3,(-1D/3D)*Math.PI);
+		Phasor v2 = new Phasor(5,TrigFun.COS,3,(5D/12D)*Math.PI);
 
         Phasor expected = new Phasor(7.36,TrigFun.COS,3,-0.55);
 
         Phasor resultado = v1.add(v2);
 
-        Assert.assertEquals(expected.getAmplitud(),resultado.getAmplitud(), ComplexNumberTest.DELTA);
+        Assert.assertEquals(expected.getAmplitud(),resultado.getAmplitud(), 1e-2);
         Assert.assertEquals(expected.getFase(), resultado.getFase(), ComplexNumberTest.DELTA);
         Assert.assertEquals(expected.getFrecuencia(), resultado.getFrecuencia(), ComplexNumberTest.DELTA);
         

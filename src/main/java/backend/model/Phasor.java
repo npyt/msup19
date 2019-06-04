@@ -23,7 +23,7 @@ public class Phasor {
 
     public Phasor(double amplitud, TrigFun funcion, double frecuencia, double fase) {
         this.frecuencia = frecuencia;
-        this.fase = fase;
+        this.fase = new PolarComplex(1, fase).getArgument();
         this.amplitud = amplitud;
         this.funcion = funcion;
     }
@@ -60,9 +60,11 @@ public class Phasor {
         otroFasor.toSIN();
 
         //los paso a binomica y sumamos
-        ComplexNumber sumaDeBinomicos = 
-        		this.toRectangular()
-        		.add(otroFasor.toRectangular());
+        RectangularComplex thisRectangular = this.toRectangular();
+        RectangularComplex otroRectangular = otroFasor.toRectangular();
+        ComplexNumber sumaDeBinomicos =
+        		thisRectangular
+        		.add(otroRectangular);
         
         //lo paso a exponencial
          PolarComplex polar = sumaDeBinomicos.toPolar(); 

@@ -1,5 +1,7 @@
 package backend.model;
 
+import java.text.DecimalFormat;
+
 /**
  * Representa la forma binomial de un complejo
  */
@@ -74,6 +76,11 @@ public class RectangularComplex extends ComplexNumber {
 
     @Override
     public String toString() {
-        return "(" + this.realPart + ", " + this.imaginaryPart + ")";
+        DecimalFormat decimalFormat = this.getDecimalFormat();
+
+        String realPartString = decimalFormat.format(this.realPart);
+        String imaginaryPartString = decimalFormat.format(this.imaginaryPart);
+
+        return "(" + realPartString + "; " + imaginaryPartString + ")";
     }
 }

@@ -15,4 +15,12 @@ public class SumOperation implements ComplexOperation {
     public char getOperatorChar() {
         return '+';
     }
+
+    public String getFirstOperandName() {
+        return "sumando";
+    }
+
+    public String getSecondOperandName() {
+        return "sumando";
+    }
 }

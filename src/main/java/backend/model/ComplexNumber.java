@@ -1,9 +1,12 @@
 package backend.model;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ComplexNumber {
+
+    private DecimalFormat decimalFormat = new DecimalFormat("#.####");
 
     /**
      * Suma de complejos
@@ -155,5 +158,9 @@ public abstract class ComplexNumber {
         RectangularComplex z2 = ((ComplexNumber) o).toRectangular();
 
         return z1.getRealPart() == z2.getRealPart() && z1.getImaginaryPart() == z2.getImaginaryPart();
+    }
+
+    protected DecimalFormat getDecimalFormat() {
+        return this.decimalFormat;
     }
 }

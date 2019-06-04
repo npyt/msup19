@@ -14,4 +14,12 @@ public class SubtractOperation implements ComplexOperation {
     public char getOperatorChar() {
         return '-';
     }
+
+    public String getFirstOperandName() {
+        return "minuendo";
+    }
+
+    public String getSecondOperandName() {
+        return "sustraendo";
+    }
 }

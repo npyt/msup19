@@ -8,11 +8,14 @@ import java.awt.*;
 
 public class Client extends JFrame {
 
-    public Client() {
-        super("nCom");
-        this.createPanel();
+    public static final String FRAME_TITLE = "nCom";
 
+    public Client() {
+        super(FRAME_TITLE);
+        this.createPanel();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.pack();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         this.setVisible(true);
         this.addWindowListener(new NComWindowListener());
     }
@@ -20,7 +23,6 @@ public class Client extends JFrame {
 
     private void createPanel() {
         Container contentPane = this.getContentPane();
-        contentPane.setLayout(new BorderLayout());
         JPanel jPanel = new JPanel();
 
         JButton sumButton = new OperationButton(new SumOperation(), this);

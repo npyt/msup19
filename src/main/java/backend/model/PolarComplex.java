@@ -1,5 +1,7 @@
 package backend.model;
 
+import java.text.DecimalFormat;
+
 /**
  * Representa la forma polar de un complejo
  */
@@ -59,6 +61,11 @@ public class PolarComplex extends ComplexNumber {
 
     @Override
     public String toString() {
-        return "[" + this.modulus + ", " + this.argument + "]";
+        DecimalFormat decimalFormat = this.getDecimalFormat();
+
+        String modulusString = decimalFormat.format(this.modulus);
+        String argumentString = decimalFormat.format(this.argument);
+
+        return "[" + modulusString + "; " + argumentString + "]";
     }
 }
