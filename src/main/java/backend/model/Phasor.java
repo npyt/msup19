@@ -23,21 +23,21 @@ public class Phasor {
 
     public Phasor(double amplitud, TrigFun funcion, double frecuencia, double fase) {
         this.frecuencia = frecuencia;
-        this.fase = new PolarComplex(1, fase).getArgument();
+        this.fase = fase;
         this.amplitud = amplitud;
         this.funcion = funcion;
     }
 
     void toSIN() {
         if (this.funcion == TrigFun.COS) {
-            this.fase -= (Math.PI / 2);
+            this.fase = (Math.PI / 2.0) - this.fase;
             this.funcion = TrigFun.SIN;
         }
     }
 
     void toCOS() {
         if (this.funcion == TrigFun.SIN) {
-            this.fase += (Math.PI / 2);
+            this.fase =  (Math.PI / 2.0) - this.fase;
             this.funcion = TrigFun.COS;
         }
     }
@@ -45,53 +45,54 @@ public class Phasor {
     PolarComplex toPolar() {
         return new PolarComplex(amplitud, fase);
     }
-    
+
     RectangularComplex toRectangular() {
         return this.toPolar().toRectangular(); //xd
-    }   
-    
+    }
 
-    Phasor add(Phasor otroFasor) {// throws Exception {
-//    	if (this.frecuencia != otroFasor.frecuencia) {
-//    		throw new Exception("Los dos fasores deben tener la misma frecuencia para sumarlos");
-//    	}
-    	
-        this.toSIN();
-        otroFasor.toSIN();
+
+    Phasor add(Phasor otroFasor) throws Exception {
+    	if (this.frecuencia != otroFasor.frecuencia) {
+    		throw new Exception("Los dos fasores deben tener la misma frecuencia para sumarlos");
+    	}
+
+    	if (this.funcion != otroFasor.funcion) {
+    		this.toCOS();
+    		otroFasor.toCOS();
+    	}
+
 
         //los paso a binomica y sumamos
-        RectangularComplex thisRectangular = this.toRectangular();
-        RectangularComplex otroRectangular = otroFasor.toRectangular();
         ComplexNumber sumaDeBinomicos =
-        		thisRectangular
-        		.add(otroRectangular);
-        
+        		this.toRectangular()
+        		.add(otroFasor.toRectangular());
+
         //lo paso a exponencial
-         PolarComplex polar = sumaDeBinomicos.toPolar(); 
+         PolarComplex polar = sumaDeBinomicos.toPolar();
 
         return new Phasor(polar.getModulus(), TrigFun.SIN, this.frecuencia, polar.getArgument());
     }
-    
+
     Boolean equals(Phasor otroFasor) {
     	this.toSIN();
     	otroFasor.toSIN();
-    	
+
     	return this.amplitud == otroFasor.amplitud &&
     			this.fase == otroFasor.fase &&
     			this.frecuencia == otroFasor.frecuencia;
     }
-    
+
     public String toString() {
     	String signo = "+";
     	if(this.fase<0) {signo = "";}
-        return String.valueOf(this.amplitud) + 
+        return String.valueOf(this.amplitud) +
         		String.valueOf(this.funcion) +
         		"("+ this.frecuencia+"t"+signo+this.fase+")";
     }
 
-    
+
     //Getters y Setters
-    
+
     public double getFrecuencia() {
 		return frecuencia;
 	}
@@ -123,7 +124,7 @@ public class Phasor {
 	public void setFuncion(TrigFun funcion) {
 		this.funcion = funcion;
 	}
-    
+
 
 
 // f(t) = A.sen(w t + faseInicial)
