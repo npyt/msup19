@@ -26,6 +26,7 @@ public class Client extends JFrame {
     private void createPanel() {
         Container contentPane = this.getContentPane();
         JPanel jPanel = new JPanel();
+        jPanel.setLayout(new GridLayout(4, 1));
 
         JButton sumButton = new OperationButton(new SumOperation(), this);
         JButton subtractButton = new OperationButton(new SubtractOperation(), this);
@@ -36,6 +37,7 @@ public class Client extends JFrame {
         jPanel.add(multiplyButton);
         jPanel.add(divideButton);
 
+        jPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         contentPane.add(jPanel);
     }
 
