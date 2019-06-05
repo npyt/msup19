@@ -1,5 +1,7 @@
 package frontend;
 
+import backend.operation.DivideOperation;
+import backend.operation.MultiplyOperation;
 import backend.operation.SubtractOperation;
 import backend.operation.SumOperation;
 
@@ -27,8 +29,12 @@ public class Client extends JFrame {
 
         JButton sumButton = new OperationButton(new SumOperation(), this);
         JButton subtractButton = new OperationButton(new SubtractOperation(), this);
+        JButton multiplyButton = new OperationButton(new MultiplyOperation(), this);
+        JButton divideButton = new OperationButton(new DivideOperation(), this);
         jPanel.add(sumButton);
         jPanel.add(subtractButton);
+        jPanel.add(multiplyButton);
+        jPanel.add(divideButton);
 
         contentPane.add(jPanel);
     }

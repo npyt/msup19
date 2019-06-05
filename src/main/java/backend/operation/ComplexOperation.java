@@ -2,12 +2,21 @@ package backend.operation;
 
 import backend.model.ComplexNumber;
 
-public interface ComplexOperation {
+public abstract class ComplexOperation {
 
-    ComplexNumber operate(ComplexNumber z1, ComplexNumber z2);
-    String getName();
-    char getOperatorChar();
+    public abstract ComplexNumber operate(ComplexNumber z1, ComplexNumber z2);
 
-    String getFirstOperandName();
-    String getSecondOperandName();
+    public abstract ParameterReference getFirstParameterReference();
+    public abstract ParameterReference getSecondParameterReference();
+
+    public abstract String getName();
+    public abstract char getOperatorChar();
+
+    public String getFirstParameterName() {
+        return this.getFirstParameterReference().getName();
+    }
+    public String getSecondParameterName() {
+        return this.getSecondParameterReference().getName();
+    }
+
 }

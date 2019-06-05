@@ -2,9 +2,22 @@ package backend.operation;
 
 import backend.model.ComplexNumber;
 
-public class SubtractOperation implements ComplexOperation {
+public class SubtractOperation extends ComplexOperation {
+    private ParameterReference minuendReference = new ParameterReference("minuendo");
+    private ParameterReference subtrahendReference = new ParameterReference("sustraendo");
+
     public ComplexNumber operate(ComplexNumber z1, ComplexNumber z2) {
         return z1.subtract(z2);
+    }
+
+    @Override
+    public ParameterReference getFirstParameterReference() {
+        return this.minuendReference;
+    }
+
+    @Override
+    public ParameterReference getSecondParameterReference() {
+        return this.subtrahendReference;
     }
 
     public String getName() {
@@ -13,13 +26,5 @@ public class SubtractOperation implements ComplexOperation {
 
     public char getOperatorChar() {
         return '-';
-    }
-
-    public String getFirstOperandName() {
-        return "minuendo";
-    }
-
-    public String getSecondOperandName() {
-        return "sustraendo";
     }
 }

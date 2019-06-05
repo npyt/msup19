@@ -3,7 +3,7 @@
 - [X] Estructuras de datos y transformaciones (23/4)
 - [X] Operaciones básicas (7/5)
 - [X] Operaciones avanzadas (21/5)
-- [ ] Suma fasores (30/5)
+- [X] Suma fasores (30/5)
 - [ ] Interfaz gráfica (17/6)
 
 Indice

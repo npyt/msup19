@@ -83,4 +83,8 @@ public class RectangularComplex extends ComplexNumber {
 
         return "(" + realPartString + "; " + imaginaryPartString + ")";
     }
+
+    public ComplexNumber toggleForm() {
+        return this.toPolar();
+    }
 }

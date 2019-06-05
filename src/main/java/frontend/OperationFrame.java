@@ -1,6 +1,7 @@
 package frontend;
 
 import backend.model.ComplexNumber;
+import backend.operation.ParameterReference;
 import backend.operation.ComplexOperation;
 
 import javax.swing.*;
@@ -8,33 +9,41 @@ import java.awt.*;
 
 public class OperationFrame extends JFrame {
 
-    private JTextField firstOperandField = new OperationField();
-    private JTextField secondOperandField = new OperationField();
-    private JTextField resultField = new OperationField();
-    private JButton firstEditButton = new JButton();
-    private JButton secondEditButton = new JButton();
-
     private ComplexOperation operation;
-    private ParameterReference firstOperand = new ParameterReference(this.firstOperandField);
-    private ParameterReference secondOperand = new ParameterReference(this.secondOperandField);
+    private ParameterReference firstParameterReference;
+    private ParameterReference secondParameterReference;
     private ComplexNumber result;
+
+    private final JFrame parentFrame;
+    private OperationField firstOperandField;
+    private OperationField secondOperandField;
+    private JTextField resultField = new JTextField();
+    private JButton firstEditButton;
+    private JButton secondEditButton;
 
     private static final int COLUMN_COUNT = 9;
 
-    public OperationFrame(ComplexOperation operation) {
+    public OperationFrame(ComplexOperation operation, JFrame parentFrame) {
         super(Client.FRAME_TITLE);
         Container contentPane = this.getContentPane();
         this.setVisible(true);
         JPanel mainPanel = new JPanel(new BorderLayout());
 
         this.operation = operation;
+        this.firstParameterReference = operation.getFirstParameterReference();
+        this.secondParameterReference = operation.getSecondParameterReference();
+        this.parentFrame = parentFrame;
         char operatorChar = operation.getOperatorChar();
-        String firstOperandName = operation.getFirstOperandName();
+        String firstOperandName = operation.getFirstParameterName();
+        this.firstEditButton = new EditButton(firstOperandName);
         this.firstEditButton.setText("Editar " + firstOperandName);
-        this.firstEditButton.addActionListener(new EditorListener(this, this.firstOperand));
-        String secondOperandName = operation.getSecondOperandName();
+        this.firstEditButton.addActionListener(
+                new EditorListener(this, this.firstParameterReference));
+        String secondOperandName = operation.getSecondParameterName();
+        this.secondEditButton = new EditButton(secondOperandName);
         this.secondEditButton.setText("Editar " + secondOperandName);
-        this.secondEditButton.addActionListener(new EditorListener(this, this.secondOperand));
+        this.secondEditButton.addActionListener(
+                new EditorListener(this, this.secondParameterReference));
 
         JPanel operationPanel = this.operationPanel(operatorChar);
         JPanel actionPanel = this.actionPanel();
@@ -62,29 +71,59 @@ public class OperationFrame extends JFrame {
         JLabel equalsLabel = new JLabel("=");
 
         JPanel operationPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        this.firstOperandField = new OperationField(this.firstParameterReference);
+        this.secondOperandField = new OperationField(this.secondParameterReference);
         operationPanel.add(this.firstOperandField);
         operationPanel.add(operatorLabel);
         operationPanel.add(this.secondOperandField);
         operationPanel.add(equalsLabel);
+
+        this.resultField.setColumns(COLUMN_COUNT);
+        this.resultField.setHorizontalAlignment(JLabel.CENTER);
+        this.resultField.setEditable(false);
         operationPanel.add(this.resultField);
         return operationPanel;
     }
 
     private JPanel actionPanel() {
         JButton backButton = new JButton("Volver");
-        JButton operateButton = new JButton("Cambiar forma");
+        JButton toggleFormButton = new JButton("Cambiar forma");
+        backButton.addActionListener(new BackButtonListener(this.parentFrame, this));
+        toggleFormButton.addActionListener(new OperationFormListener(this));
 
         JPanel actionPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         actionPanel.add(backButton);
-        actionPanel.add(operateButton);
+        actionPanel.add(toggleFormButton);
         return actionPanel;
     }
 
-    public void updateResult() {
-        ComplexNumber z1 = this.firstOperand.getValue();
-        ComplexNumber z2 = this.secondOperand.getValue();
-        this.result = this.operation.operate(z1, z2);
+    public void updateContent() {
+        this.updateResult();
+        this.updateComponents();
+    }
 
-        this.resultField.setText(result.toString());
+    private void updateResult() {
+        ComplexNumber z1 = this.firstParameterReference.getValue();
+        ComplexNumber z2 = this.secondParameterReference.getValue();
+        this.result = this.operation.operate(z1, z2);
+    }
+
+    private void updateComponents() {
+        this.firstOperandField.updateContent();
+        this.secondOperandField.updateContent();
+        this.resultField.setText(this.result.toString());
+    }
+
+    public void toggleForm() {
+        String text = this.resultField.getText();
+        if(text.isEmpty()){
+            return;
+        }
+        this.result = this.result.toggleForm();
+        this.updateComponents();
+    }
+
+    public ComplexOperation getOperation() {
+        return this.operation;
     }
 }

@@ -1,6 +1,8 @@
 package frontend;
 
 import backend.model.ComplexNumber;
+import backend.operation.ParameterReference;
+import backend.util.ParseUtils;
 import frontend.form.Form;
 import frontend.form.RectangularForm;
 
@@ -40,7 +42,7 @@ public class EditorFrame extends JFrame {
         contentPane.add(mainPanel);
         this.setVisible(true);
         this.pack();
-        this.addWindowListener(new EditorWindowListener(this.parentFrame));
+        this.addWindowListener(new ChildWindowListener(this.parentFrame));
     }
 
     private JPanel inputPanel(JLabel label, JTextField field, String labelText) {
@@ -57,7 +59,7 @@ public class EditorFrame extends JFrame {
     private JPanel southPanel() {
         String switchLabel = this.activeForm.getSwitchLabel();
         this.toggleFormButton.setText(switchLabel);
-        this.toggleFormButton.addActionListener(new ToggleFormListener(this));
+        this.toggleFormButton.addActionListener(new EditorFormListener(this));
         JButton applyButton = new JButton("Aplicar");
         applyButton.addActionListener(new ApplyButtonListener(this));
 
@@ -95,12 +97,34 @@ public class EditorFrame extends JFrame {
         double secondParameter = Double.parseDouble(secondOperandString);
 
         ComplexNumber newValue = this.activeForm.parse(firstParameter, secondParameter);
-        this.parameterReference.update(newValue);
-        this.parentFrame.updateResult();
+        this.parameterReference.setValue(newValue);
+        this.parentFrame.updateContent();
 
         this.setVisible(false);
         this.parentFrame.setEnabled(true);
         this.parentFrame.setAlwaysOnTop(true);
         this.dispose();
+    }
+
+    public boolean validateInput() {
+        String firstInputString = this.firstParameterField.getText();
+        String secondInputString = this.secondParameterField.getText();
+
+        String errorMessage = "Ingresar un " + this.parameterReference.getName() + " válido";
+        if(!ParseUtils.isNumeric(firstInputString) || !ParseUtils.isNumeric(secondInputString)) {
+            JOptionPane.showMessageDialog(this, errorMessage);
+            return false;
+        }
+
+        double firstInputValue = Double.parseDouble(firstInputString);
+        double secondInputValue = Double.parseDouble(secondInputString);
+        ComplexNumber input = this.activeForm.parse(firstInputValue, secondInputValue);
+
+        if(!parameterReference.validate(input)) {
+            JOptionPane.showMessageDialog(this, errorMessage);
+            return false;
+        }
+
+        return true;
     }
 }

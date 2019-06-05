@@ -135,7 +135,6 @@ public class PolarComplexTest {
         double expectedModulus = Math.pow(73, 0.5);
         double actual = addition.toPolar().getModulus();
 
-        System.out.println(Math.abs(expectedModulus - actual));
         Assert.assertEquals(expectedModulus, actual, ComplexNumberTest.DELTA);
     }
 
@@ -283,6 +282,20 @@ public class PolarComplexTest {
         double expected = Math.pow(8, 1D / 3D);
 
         Assert.assertEquals(expected, firstResult.getModulus(), ComplexNumberTest.DELTA);
+    }
+
+    @Test
+    public void testToggleFormRealPart() {
+        PolarComplex z = new PolarComplex(Math.sqrt(2D), Math.PI/4);
+        RectangularComplex rectangularZ = (RectangularComplex) z.toggleForm();
+        Assert.assertEquals(rectangularZ.getRealPart(), 1D, ComplexNumberTest.DELTA);
+    }
+
+    @Test
+    public void testToggleFormImaginaryPart() {
+        PolarComplex z = new PolarComplex(Math.sqrt(2D), Math.PI/4);
+        RectangularComplex rectangularZ = (RectangularComplex) z.toggleForm();
+        Assert.assertEquals(rectangularZ.getImaginaryPart(), 1D, ComplexNumberTest.DELTA);
     }
 }
 

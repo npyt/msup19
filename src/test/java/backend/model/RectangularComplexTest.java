@@ -80,4 +80,19 @@ public class RectangularComplexTest {
         assertEquals(new RectangularComplex(4, 1), conjugate);
     }
 
+    @Test
+    public void toggleFormModulus() {
+        RectangularComplex z = new RectangularComplex(-1D, 1D);
+        PolarComplex polarZ = (PolarComplex) z.toggleForm();
+
+        assertEquals(Math.sqrt(2), polarZ.getModulus(), ComplexNumberTest.DELTA);
+    }
+
+    @Test
+    public void toggleFormArgument() {
+        RectangularComplex z = new RectangularComplex(-1D, 1D);
+        PolarComplex polarZ = (PolarComplex) z.toggleForm();
+
+        assertEquals(Math.PI * 3D/4, polarZ.getArgument(), ComplexNumberTest.DELTA);
+    }
 }

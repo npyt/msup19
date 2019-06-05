@@ -1,13 +1,11 @@
 package frontend;
 
+import backend.operation.ParameterReference;
 import backend.operation.ComplexOperation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 
 class OperationListener implements ActionListener {
 
@@ -20,7 +18,7 @@ class OperationListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        JFrame complexFrame = new OperationFrame(this.operation);
+        JFrame complexFrame = new OperationFrame(this.operation, this.mainFrame);
         complexFrame.setVisible(true);
         this.mainFrame.setVisible(false);
         complexFrame.setLocationRelativeTo(this.mainFrame);
@@ -45,16 +43,29 @@ class EditorListener implements ActionListener {
     }
 }
 
-class ToggleFormListener implements ActionListener {
+class EditorFormListener implements ActionListener {
 
     private EditorFrame editorFrame;
 
-    public ToggleFormListener(EditorFrame editorFrame){
+    public EditorFormListener(EditorFrame editorFrame){
         this.editorFrame = editorFrame;
     }
 
     public void actionPerformed(ActionEvent e) {
         this.editorFrame.toggleForm();
+    }
+}
+
+class OperationFormListener implements ActionListener {
+
+    private final OperationFrame operationFrame;
+
+    public OperationFormListener(OperationFrame operationFrame) {
+        this.operationFrame = operationFrame;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        this.operationFrame.toggleForm();
     }
 }
 
@@ -67,7 +78,27 @@ class ApplyButtonListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        this.editorFrame.retrieveContent();
+        if(this.editorFrame.validateInput()) {
+            this.editorFrame.retrieveContent();
+        }
+    }
+}
+
+class BackButtonListener implements ActionListener {
+
+    private JFrame previousFrame;
+    private JFrame currentFrame;
+
+    public BackButtonListener(JFrame previousFrame, JFrame currentFrame) {
+        this.previousFrame = previousFrame;
+        this.currentFrame = currentFrame;
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        this.previousFrame.setVisible(true);
+        this.previousFrame.setEnabled(true);
+        this.currentFrame.setVisible(false);
+        this.currentFrame.dispose();
     }
 }
 
@@ -88,11 +119,11 @@ class NComWindowListener extends Frame implements WindowListener {
 
 }
 
-class EditorWindowListener extends Frame implements WindowListener {
+class ChildWindowListener extends Frame implements WindowListener {
 
-    private OperationFrame parentFrame;
+    private JFrame parentFrame;
 
-    public EditorWindowListener(OperationFrame parentFrame) {
+    public ChildWindowListener(JFrame parentFrame) {
         this.parentFrame = parentFrame;
     }
 

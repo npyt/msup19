@@ -68,4 +68,8 @@ public class PolarComplex extends ComplexNumber {
 
         return "[" + modulusString + "; " + argumentString + "]";
     }
+
+    public ComplexNumber toggleForm() {
+        return this.toRectangular();
+    }
 }

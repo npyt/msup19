@@ -163,4 +163,6 @@ public abstract class ComplexNumber {
     protected DecimalFormat getDecimalFormat() {
         return this.decimalFormat;
     }
+
+    public abstract ComplexNumber toggleForm();
 }
