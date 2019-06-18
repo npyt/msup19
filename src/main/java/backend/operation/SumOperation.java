@@ -1,5 +1,6 @@
 package backend.operation;
 
+import backend.form.RectangularComplexForm;
 import backend.model.ComplexNumber;
 
 public class SumOperation extends ComplexOperation {
@@ -7,6 +8,10 @@ public class SumOperation extends ComplexOperation {
     private ComplexParameterReference firstAddend = new ComplexParameterReference("sumando");
     private ComplexParameterReference secondAddend = new ComplexParameterReference("sumando");
     private ComplexParameterReference resultParameterReference = new ComplexParameterReference("resultado");
+
+    public SumOperation() {
+        super(new RectangularComplexForm());
+    }
 
     @Override
     public void operate() {

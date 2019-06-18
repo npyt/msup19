@@ -1,11 +1,17 @@
 package backend.operation;
 
+import backend.form.Form;
+import backend.form.RectangularComplexForm;
 import backend.model.ComplexNumber;
 
 public class SubtractOperation extends ComplexOperation {
     private ComplexParameterReference minuendReference = new ComplexParameterReference("minuendo");
     private ComplexParameterReference subtrahendReference = new ComplexParameterReference("sustraendo");
     private ComplexParameterReference resultParameterReference = new ComplexParameterReference("resultado");
+
+    public SubtractOperation() {
+        super(new RectangularComplexForm());
+    }
 
     @Override
     public void operate() {

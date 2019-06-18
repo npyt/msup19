@@ -33,4 +33,8 @@ public class RootsParameterReference extends ParameterReference {
         builder.append("}");
         return builder.toString();
     }
+
+    public List<ComplexNumber> getRoots() {
+        return roots;
+    }
 }

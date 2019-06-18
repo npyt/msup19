@@ -1,7 +1,9 @@
-package frontend.form;
+package backend.form;
 
 import backend.model.ComplexNumber;
 import backend.model.RectangularComplex;
+import backend.operation.ComplexParameterReference;
+import backend.operation.ParameterReference;
 import frontend.ComplexEditorFrame;
 
 public class RectangularComplexForm implements ComplexForm {
@@ -24,5 +26,16 @@ public class RectangularComplexForm implements ComplexForm {
 
     public String getSwitchLabel() {
         return "Pasar a polar";
+    }
+
+    @Override
+    public Form getOpposite() {
+        return new PolarComplexForm();
+    }
+
+    @Override
+    public String parse(ParameterReference resultParameterReference) {
+        ComplexParameterReference complexParameterReference = (ComplexParameterReference) resultParameterReference;
+        return complexParameterReference.getValue().toRectangular().toString();
     }
 }

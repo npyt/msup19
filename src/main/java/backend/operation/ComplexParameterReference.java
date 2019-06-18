@@ -18,7 +18,7 @@ public class ComplexParameterReference extends ParameterReference {
 
     @Override
     public String toString() {
-        return this.value.toString();
+        return value.toString();
     }
 
     public ComplexNumber getValue() {

@@ -2,7 +2,6 @@ package backend.operation;
 
 public abstract class ParameterReference {
     protected String name;
-
     public ParameterReference(String parameterName) {
         this.name = parameterName;
     }

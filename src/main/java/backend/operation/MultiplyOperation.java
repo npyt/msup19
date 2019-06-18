@@ -1,5 +1,7 @@
 package backend.operation;
 
+import backend.form.Form;
+import backend.form.PolarComplexForm;
 import backend.model.ComplexNumber;
 
 public class MultiplyOperation extends ComplexOperation {
@@ -7,6 +9,10 @@ public class MultiplyOperation extends ComplexOperation {
     private ComplexParameterReference firstFactorReference = new ComplexParameterReference("factor");
     private ComplexParameterReference secondFactorReference = new ComplexParameterReference("factor");
     private ComplexParameterReference resultParameterReference = new ComplexParameterReference("resultado");
+
+    public MultiplyOperation() {
+        super(new PolarComplexForm());
+    }
 
     @Override
     public void operate() {

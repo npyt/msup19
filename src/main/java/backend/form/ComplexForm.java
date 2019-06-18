@@ -1,9 +1,9 @@
-package frontend.form;
+package backend.form;
 
 import backend.model.ComplexNumber;
 import frontend.ComplexEditorFrame;
 
-public interface ComplexForm {
+public interface ComplexForm extends Form {
     void swap(ComplexEditorFrame editorFrame);
     String getFirstOperandPrompt();
     String getSecondParameterPrompt();

@@ -1,11 +1,16 @@
 package backend.operation;
 
+import backend.form.RootsPolarComplexForm;
 import backend.model.ComplexNumber;
 
 public class RootOperation extends ComplexOperation {
     private ComplexParameterReference argumentReference = new ComplexParameterReference("argumento");
     private NaturalParameterReference indexReference = new NaturalParameterReference("indice");
     private RootsParameterReference resultParameterReference = new RootsParameterReference("resultado");
+
+    public RootOperation() {
+        super(new RootsPolarComplexForm());
+    }
 
     @Override
     public ParameterReference getFirstParameterReference() {

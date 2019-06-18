@@ -1,5 +1,7 @@
 package backend.operation;
 
+import backend.form.Form;
+import backend.form.PolarComplexForm;
 import backend.model.ComplexNumber;
 
 public class DivideOperation extends ComplexOperation {
@@ -7,6 +9,10 @@ public class DivideOperation extends ComplexOperation {
     private ComplexParameterReference dividendParameterReference = new ComplexParameterReference("dividendo");
     private ComplexParameterReference divisorParameterReference = new DivisorReference();
     private ComplexParameterReference resultParameterReference = new ComplexParameterReference("resultado");
+
+    public DivideOperation() {
+        super(new PolarComplexForm());
+    }
 
     @Override
     public void operate() {
@@ -27,7 +33,7 @@ public class DivideOperation extends ComplexOperation {
 
     @Override
     public ParameterReference getResultParameterReference() {
-        return null;
+        return this.resultParameterReference;
     }
 
     @Override

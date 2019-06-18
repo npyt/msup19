@@ -1,13 +1,16 @@
 package backend.operation;
 
+import backend.form.PhasorSineForm;
 import backend.model.Phasor;
 
 public class PhasorParameterReference extends ParameterReference {
 
+    private final PhasorOperation parentOperation;
     private Phasor value = new Phasor(1, Phasor.TrigFun.COS, 0, 0);
 
-    public PhasorParameterReference(String parameterName) {
+    public PhasorParameterReference(String parameterName, PhasorOperation parentOperation) {
         super(parameterName);
+        this.parentOperation = parentOperation;
     }
 
     public void update(Phasor value) {
@@ -16,7 +19,7 @@ public class PhasorParameterReference extends ParameterReference {
 
     @Override
     public String toString() {
-        return this.value.toString();
+        return value.toString();
     }
 
     public Phasor getValue() {
@@ -25,5 +28,6 @@ public class PhasorParameterReference extends ParameterReference {
 
     public void setValue(Phasor phasor) {
         this.value = phasor;
+        this.parentOperation.form = new PhasorSineForm();
     }
 }

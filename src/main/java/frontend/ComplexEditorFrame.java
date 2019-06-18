@@ -3,8 +3,8 @@ package frontend;
 import backend.model.ComplexNumber;
 import backend.operation.ComplexParameterReference;
 import backend.operation.ParameterReference;
-import frontend.form.ComplexForm;
-import frontend.form.RectangularComplexForm;
+import backend.form.ComplexForm;
+import backend.form.RectangularComplexForm;
 
 import javax.swing.*;
 import java.awt.*;

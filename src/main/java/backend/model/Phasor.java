@@ -28,14 +28,14 @@ public class Phasor {
         this.funcion = funcion;
     }
 
-    void toSIN() {
+    public void toSIN() {
         if (this.funcion == TrigFun.COS) {
             this.fase = (Math.PI / 2.0) - this.fase;
             this.funcion = TrigFun.SIN;
         }
     }
 
-    void toCOS() {
+    public void toCOS() {
         if (this.funcion == TrigFun.SIN) {
             this.fase =  (Math.PI / 2.0) - this.fase;
             this.funcion = TrigFun.COS;

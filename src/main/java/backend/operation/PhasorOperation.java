@@ -1,13 +1,18 @@
 package backend.operation;
 
+import backend.form.PhasorSineForm;
 import backend.model.Phasor;
 import backend.model.PhasorOperationException;
 
 public class PhasorOperation extends ComplexOperation {
 
-    private PhasorParameterReference firstParameterReference = new PhasorParameterReference("fasor");
-    private PhasorParameterReference secondParameterReference = new PhasorParameterReference("fasor");
-    private PhasorParameterReference resultParameterReference = new PhasorParameterReference("resultado");
+    private PhasorParameterReference firstParameterReference = new PhasorParameterReference("fasor", this);
+    private PhasorParameterReference secondParameterReference = new PhasorParameterReference("fasor", this);
+    private PhasorParameterReference resultParameterReference = new PhasorParameterReference("resultado", this);
+
+    public PhasorOperation() {
+        super(new PhasorSineForm());
+    }
 
     @Override
     public ParameterReference getFirstParameterReference() {

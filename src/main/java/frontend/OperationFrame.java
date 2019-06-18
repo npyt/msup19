@@ -92,15 +92,15 @@ public class OperationFrame extends JFrame {
     }
 
     public void toggleForm() {
-//        this.operation.toggleForm();
-        String resultString = this.operation.getResultParameterReference().toString();
+        this.operation.toggleForm();
+        String resultString = this.operation.getResultString();
         this.resultField.setText(resultString);
     }
 
     public void updateResult() {
         try {
             this.operation.operate();
-            this.resultField.setText(this.operation.getResultParameterReference().toString());
+            this.resultField.setText(this.operation.getResultString());
         } catch (PhasorOperationException e) {
             this.resultField.setText("Error!");
         }
