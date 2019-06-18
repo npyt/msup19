@@ -4,22 +4,30 @@ import backend.model.ComplexNumber;
 
 public class DivideOperation extends ComplexOperation {
 
-    private ParameterReference dividend = new ParameterReference("dividendo");
-    private ParameterReference divisorReference = new DivisorReference();
+    private ComplexParameterReference dividendParameterReference = new ComplexParameterReference("dividendo");
+    private ComplexParameterReference divisorParameterReference = new DivisorReference();
+    private ComplexParameterReference resultParameterReference = new ComplexParameterReference("resultado");
 
     @Override
-    public ComplexNumber operate(ComplexNumber z1, ComplexNumber z2) {
-        return z1.divideBy(z2);
+    public void operate() {
+        ComplexNumber dividendValue = this.dividendParameterReference.getValue();
+        ComplexNumber divisorValue = this.divisorParameterReference.getValue();
+        this.resultParameterReference.setValue(dividendValue.divideBy(divisorValue));
     }
 
     @Override
     public ParameterReference getFirstParameterReference() {
-        return this.dividend;
+        return this.dividendParameterReference;
     }
 
     @Override
     public ParameterReference getSecondParameterReference() {
-        return this.divisorReference;
+        return this.divisorParameterReference;
+    }
+
+    @Override
+    public ParameterReference getResultParameterReference() {
+        return null;
     }
 
     @Override

@@ -1,10 +1,10 @@
 package frontend.form;
 
 import backend.model.ComplexNumber;
-import frontend.EditorFrame;
+import frontend.ComplexEditorFrame;
 
-public interface Form {
-    void swap(EditorFrame editorFrame);
+public interface ComplexForm {
+    void swap(ComplexEditorFrame editorFrame);
     String getFirstOperandPrompt();
     String getSecondParameterPrompt();
     String getSwitchLabel();

@@ -3,12 +3,12 @@ package frontend.form;
 
 import backend.model.ComplexNumber;
 import backend.model.PolarComplex;
-import frontend.EditorFrame;
+import frontend.ComplexEditorFrame;
 
-public class PolarForm implements Form {
+public class PolarComplexForm implements ComplexForm {
 
-    public void swap(EditorFrame operationFrame) {
-        operationFrame.setActiveForm(new RectangularForm());
+    public void swap(ComplexEditorFrame operationFrame) {
+        operationFrame.setActiveForm(new RectangularComplexForm());
     }
 
     public ComplexNumber parse(double modulus, double argument) {

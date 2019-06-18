@@ -1,22 +1,22 @@
 package backend.operation;
 
-import backend.model.ComplexNumber;
+import backend.model.PhasorOperationException;
 
 public abstract class ComplexOperation {
 
-    public abstract ComplexNumber operate(ComplexNumber z1, ComplexNumber z2);
-
     public abstract ParameterReference getFirstParameterReference();
     public abstract ParameterReference getSecondParameterReference();
+    public abstract ParameterReference getResultParameterReference();
+
+    public abstract void operate() throws PhasorOperationException;
 
     public abstract String getName();
     public abstract char getOperatorChar();
 
-    public String getFirstParameterName() {
+    public String getFirstOperandName() {
         return this.getFirstParameterReference().getName();
     }
-    public String getSecondParameterName() {
+    public String getSecondOperandName() {
         return this.getSecondParameterReference().getName();
     }
-
 }

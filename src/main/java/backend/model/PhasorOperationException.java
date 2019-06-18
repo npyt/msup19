@@ -1,6 +1,6 @@
 package backend.model;
 
-public class PhasorOperationException extends RuntimeException {
+public class PhasorOperationException extends Exception {
     public PhasorOperationException(String s) {
         super(s);
     }

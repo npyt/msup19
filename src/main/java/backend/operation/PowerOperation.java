@@ -2,27 +2,27 @@ package backend.operation;
 
 import backend.model.ComplexNumber;
 
-public class SumOperation extends ComplexOperation {
+public class PowerOperation extends ComplexOperation {
 
-    private ComplexParameterReference firstAddend = new ComplexParameterReference("sumando");
-    private ComplexParameterReference secondAddend = new ComplexParameterReference("sumando");
+    private ComplexParameterReference baseReference = new ComplexParameterReference("base");
+    private NaturalParameterReference exponentReference = new NaturalParameterReference("exponente");
     private ComplexParameterReference resultParameterReference = new ComplexParameterReference("resultado");
 
     @Override
     public void operate() {
-        ComplexNumber firstAddendValue = this.firstAddend.getValue();
-        ComplexNumber secondAddendValue = this.secondAddend.getValue();
-        this.resultParameterReference.setValue(firstAddendValue.add(secondAddendValue));
+        int exponent = this.exponentReference.getValue();
+        ComplexNumber base = this.baseReference.getValue();
+        this.resultParameterReference.setValue(base.power(exponent));
     }
 
     @Override
     public ParameterReference getFirstParameterReference() {
-        return this.firstAddend;
+        return this.baseReference;
     }
 
     @Override
     public ParameterReference getSecondParameterReference() {
-        return this.secondAddend;
+        return this.exponentReference;
     }
 
     @Override
@@ -30,11 +30,14 @@ public class SumOperation extends ComplexOperation {
         return this.resultParameterReference;
     }
 
+    @Override
     public String getName() {
-        return "Sumar complejos";
+        return "Elevar complejo";
     }
 
+    @Override
     public char getOperatorChar() {
-        return '+';
+        return '^';
     }
+
 }

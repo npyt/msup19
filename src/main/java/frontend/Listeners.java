@@ -12,7 +12,7 @@ class OperationListener implements ActionListener {
     private ComplexOperation operation;
     private JFrame mainFrame;
 
-    public OperationListener(ComplexOperation operation, JFrame mainFrame) {
+    OperationListener(ComplexOperation operation, JFrame mainFrame) {
         this.operation = operation;
         this.mainFrame = mainFrame;
     }
@@ -27,27 +27,29 @@ class OperationListener implements ActionListener {
 
 class EditorListener implements ActionListener {
 
-    private OperationFrame operationFrame;
-    private ParameterReference parameterReference;
+    private final ParameterReference parameterReference;
+    private final JTextField modifyTarget;
+    private final OperationFrame parentFrame;
 
-    public EditorListener(OperationFrame operationFrame, ParameterReference parameterReference) {
-        this.operationFrame = operationFrame;
+    EditorListener(ParameterReference parameterReference, JTextField modifyTarget, OperationFrame operationFrame) {
         this.parameterReference = parameterReference;
+        this.modifyTarget = modifyTarget;
+        this.parentFrame = operationFrame;
     }
 
     public void actionPerformed(ActionEvent e) {
-        JFrame editorFrame = new EditorFrame(this.operationFrame, this.parameterReference);
+        JFrame editorFrame = EditorFrameFactory.buildEditorFrame(this.parameterReference, this.modifyTarget, this.parentFrame);
         editorFrame.setAlwaysOnTop(true);
-        editorFrame.setLocationRelativeTo(this.operationFrame);
-        this.operationFrame.setEnabled(false);
+        editorFrame.setLocationRelativeTo(this.parentFrame);
+        this.parentFrame.setEnabled(false);
     }
 }
 
-class EditorFormListener implements ActionListener {
+class ToggleFormListener implements ActionListener {
 
-    private EditorFrame editorFrame;
+    private ComplexEditorFrame editorFrame;
 
-    public EditorFormListener(EditorFrame editorFrame){
+    ToggleFormListener(ComplexEditorFrame editorFrame){
         this.editorFrame = editorFrame;
     }
 
@@ -60,7 +62,7 @@ class OperationFormListener implements ActionListener {
 
     private final OperationFrame operationFrame;
 
-    public OperationFormListener(OperationFrame operationFrame) {
+    OperationFormListener(OperationFrame operationFrame) {
         this.operationFrame = operationFrame;
     }
 
@@ -71,15 +73,24 @@ class OperationFormListener implements ActionListener {
 
 class ApplyButtonListener implements ActionListener {
 
+    private final JTextField modifyTarget;
+    private final OperationFrame parentFrame;
     private EditorFrame editorFrame;
 
-    public ApplyButtonListener(EditorFrame editorFrame) {
+    ApplyButtonListener(EditorFrame editorFrame, JTextField modifyTarget, OperationFrame parentFrame) {
         this.editorFrame = editorFrame;
+        this.modifyTarget = modifyTarget;
+        this.parentFrame = parentFrame;
     }
 
     public void actionPerformed(ActionEvent e) {
         if(this.editorFrame.validateInput()) {
-            this.editorFrame.retrieveContent();
+            String str = this.editorFrame.getParameterReference().toString();
+            this.modifyTarget.setText(str);
+            this.parentFrame.updateResult();
+            this.parentFrame.setVisible(true);
+            this.parentFrame.setEnabled(true);
+            this.editorFrame.dispose();
         }
     }
 }
@@ -89,7 +100,7 @@ class BackButtonListener implements ActionListener {
     private JFrame previousFrame;
     private JFrame currentFrame;
 
-    public BackButtonListener(JFrame previousFrame, JFrame currentFrame) {
+    BackButtonListener(JFrame previousFrame, JFrame currentFrame) {
         this.previousFrame = previousFrame;
         this.currentFrame = currentFrame;
     }
@@ -123,7 +134,7 @@ class ChildWindowListener extends Frame implements WindowListener {
 
     private JFrame parentFrame;
 
-    public ChildWindowListener(JFrame parentFrame) {
+    ChildWindowListener(JFrame parentFrame) {
         this.parentFrame = parentFrame;
     }
 

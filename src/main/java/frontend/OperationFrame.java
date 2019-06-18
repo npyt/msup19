@@ -1,27 +1,20 @@
 package frontend;
 
-import backend.model.ComplexNumber;
-import backend.operation.ParameterReference;
+import backend.model.PhasorOperationException;
 import backend.operation.ComplexOperation;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class OperationFrame extends JFrame {
 
     private ComplexOperation operation;
-    private ParameterReference firstParameterReference;
-    private ParameterReference secondParameterReference;
-    private ComplexNumber result;
 
     private final JFrame parentFrame;
-    private OperationField firstOperandField;
-    private OperationField secondOperandField;
+    private JTextField firstOperandField;
+    private JTextField secondOperandField;
     private JTextField resultField = new JTextField();
-    private JButton firstEditButton;
-    private JButton secondEditButton;
 
-    private static final int COLUMN_COUNT = 9;
+    private static final int COLUMN_COUNT = 15;
 
     public OperationFrame(ComplexOperation operation, JFrame parentFrame) {
         super(Client.FRAME_TITLE);
@@ -30,22 +23,9 @@ public class OperationFrame extends JFrame {
         JPanel mainPanel = new JPanel(new BorderLayout());
 
         this.operation = operation;
-        this.firstParameterReference = operation.getFirstParameterReference();
-        this.secondParameterReference = operation.getSecondParameterReference();
         this.parentFrame = parentFrame;
-        char operatorChar = operation.getOperatorChar();
-        String firstOperandName = operation.getFirstParameterName();
-        this.firstEditButton = new EditButton(firstOperandName);
-        this.firstEditButton.setText("Editar " + firstOperandName);
-        this.firstEditButton.addActionListener(
-                new EditorListener(this, this.firstParameterReference));
-        String secondOperandName = operation.getSecondParameterName();
-        this.secondEditButton = new EditButton(secondOperandName);
-        this.secondEditButton.setText("Editar " + secondOperandName);
-        this.secondEditButton.addActionListener(
-                new EditorListener(this, this.secondParameterReference));
 
-        JPanel operationPanel = this.operationPanel(operatorChar);
+        JPanel operationPanel = this.operationPanel();
         JPanel actionPanel = this.actionPanel();
         JPanel editorPanel = this.editorPanel();
 
@@ -58,27 +38,24 @@ public class OperationFrame extends JFrame {
         this.addWindowListener(new NComWindowListener());
     }
 
-    private JPanel editorPanel() {
-        JPanel editorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        editorPanel.add(this.firstEditButton);
-        editorPanel.add(this.secondEditButton);
-        return editorPanel;
-    }
-
-    private JPanel operationPanel(char operatorChar) {
-
+    private JPanel operationPanel() {
+        char operatorChar = this.operation.getOperatorChar();
         JLabel operatorLabel = new JLabel(Character.toString(operatorChar));
         JLabel equalsLabel = new JLabel("=");
 
         JPanel operationPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        this.firstOperandField = new OperationField(this.firstParameterReference);
-        this.secondOperandField = new OperationField(this.secondParameterReference);
+        this.firstOperandField = new JTextField(COLUMN_COUNT);
+        this.firstOperandField.setHorizontalAlignment(JLabel.CENTER);
+        this.firstOperandField.setEditable(false);
+        this.secondOperandField = new JTextField(COLUMN_COUNT);
+        this.secondOperandField.setHorizontalAlignment(JLabel.CENTER);
+        this.secondOperandField.setEditable(false);
         operationPanel.add(this.firstOperandField);
         operationPanel.add(operatorLabel);
         operationPanel.add(this.secondOperandField);
         operationPanel.add(equalsLabel);
 
-        this.resultField.setColumns(COLUMN_COUNT);
+        this.resultField.setColumns(COLUMN_COUNT * 2);
         this.resultField.setHorizontalAlignment(JLabel.CENTER);
         this.resultField.setEditable(false);
         operationPanel.add(this.resultField);
@@ -97,30 +74,36 @@ public class OperationFrame extends JFrame {
         return actionPanel;
     }
 
-    public void updateContent() {
-        this.updateResult();
-        this.updateComponents();
-    }
+    private JPanel editorPanel() {
+        String firstOperandName = this.operation.getFirstOperandName();
+        JButton firstEditButton = new JButton(firstOperandName);
+        firstEditButton.setText("Editar " + firstOperandName);
+        firstEditButton.addActionListener(new EditorListener(this.operation.getFirstParameterReference(), this.firstOperandField, this));
 
-    private void updateResult() {
-        ComplexNumber z1 = this.firstParameterReference.getValue();
-        ComplexNumber z2 = this.secondParameterReference.getValue();
-        this.result = this.operation.operate(z1, z2);
-    }
+        String secondOperandName = this.operation.getSecondOperandName();
+        JButton secondEditButton = new JButton(secondOperandName);
+        secondEditButton.setText("Editar " + secondOperandName);
+        secondEditButton.addActionListener(new EditorListener(this.operation.getSecondParameterReference(), this.secondOperandField, this));
 
-    private void updateComponents() {
-        this.firstOperandField.updateContent();
-        this.secondOperandField.updateContent();
-        this.resultField.setText(this.result.toString());
+        JPanel editorPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        editorPanel.add(firstEditButton);
+        editorPanel.add(secondEditButton);
+        return editorPanel;
     }
 
     public void toggleForm() {
-        String text = this.resultField.getText();
-        if(text.isEmpty()){
-            return;
+//        this.operation.toggleForm();
+        String resultString = this.operation.getResultParameterReference().toString();
+        this.resultField.setText(resultString);
+    }
+
+    public void updateResult() {
+        try {
+            this.operation.operate();
+            this.resultField.setText(this.operation.getResultParameterReference().toString());
+        } catch (PhasorOperationException e) {
+            this.resultField.setText("Error!");
         }
-        this.result = this.result.toggleForm();
-        this.updateComponents();
     }
 
     public ComplexOperation getOperation() {

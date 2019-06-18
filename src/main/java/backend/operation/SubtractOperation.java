@@ -3,11 +3,15 @@ package backend.operation;
 import backend.model.ComplexNumber;
 
 public class SubtractOperation extends ComplexOperation {
-    private ParameterReference minuendReference = new ParameterReference("minuendo");
-    private ParameterReference subtrahendReference = new ParameterReference("sustraendo");
+    private ComplexParameterReference minuendReference = new ComplexParameterReference("minuendo");
+    private ComplexParameterReference subtrahendReference = new ComplexParameterReference("sustraendo");
+    private ComplexParameterReference resultParameterReference = new ComplexParameterReference("resultado");
 
-    public ComplexNumber operate(ComplexNumber z1, ComplexNumber z2) {
-        return z1.subtract(z2);
+    @Override
+    public void operate() {
+        ComplexNumber minuendValue = this.minuendReference.getValue();
+        ComplexNumber subtrahendValue = this.subtrahendReference.getValue();
+        this.resultParameterReference.setValue(minuendValue.subtract(subtrahendValue));
     }
 
     @Override
@@ -18,6 +22,11 @@ public class SubtractOperation extends ComplexOperation {
     @Override
     public ParameterReference getSecondParameterReference() {
         return this.subtrahendReference;
+    }
+
+    @Override
+    public ParameterReference getResultParameterReference() {
+        return this.resultParameterReference;
     }
 
     public String getName() {

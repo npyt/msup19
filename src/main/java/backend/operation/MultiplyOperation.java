@@ -4,22 +4,30 @@ import backend.model.ComplexNumber;
 
 public class MultiplyOperation extends ComplexOperation {
 
-    private ParameterReference firstFactor = new ParameterReference("factor");
-    private ParameterReference secondFactor = new ParameterReference("factor");
+    private ComplexParameterReference firstFactorReference = new ComplexParameterReference("factor");
+    private ComplexParameterReference secondFactorReference = new ComplexParameterReference("factor");
+    private ComplexParameterReference resultParameterReference = new ComplexParameterReference("resultado");
 
     @Override
-    public ComplexNumber operate(ComplexNumber z1, ComplexNumber z2) {
-        return z1.multiply(z2);
+    public void operate() {
+        ComplexNumber firstFactorValue = this.firstFactorReference.getValue();
+        ComplexNumber secondFactorValue = this.secondFactorReference.getValue();
+        this.resultParameterReference.setValue(firstFactorValue.multiply(secondFactorValue));
     }
 
     @Override
     public ParameterReference getFirstParameterReference() {
-        return this.firstFactor;
+        return this.firstFactorReference;
     }
 
     @Override
     public ParameterReference getSecondParameterReference() {
-        return this.secondFactor;
+        return this.secondFactorReference;
+    }
+
+    @Override
+    public ParameterReference getResultParameterReference() {
+        return this.resultParameterReference;
     }
 
     @Override

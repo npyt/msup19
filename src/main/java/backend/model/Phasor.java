@@ -51,7 +51,7 @@ public class Phasor {
     }
 
 
-    Phasor add(Phasor otroFasor) throws Exception {
+    public Phasor add(Phasor otroFasor) throws PhasorOperationException {
     	if (this.frecuencia != otroFasor.frecuencia) {
     		throw new PhasorOperationException("Los dos fasores deben tener la misma frecuencia para sumarlos");
     	}

@@ -1,9 +1,6 @@
 package frontend;
 
-import backend.operation.DivideOperation;
-import backend.operation.MultiplyOperation;
-import backend.operation.SubtractOperation;
-import backend.operation.SumOperation;
+import backend.operation.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,10 +29,16 @@ public class Client extends JFrame {
         JButton subtractButton = new OperationButton(new SubtractOperation(), this);
         JButton multiplyButton = new OperationButton(new MultiplyOperation(), this);
         JButton divideButton = new OperationButton(new DivideOperation(), this);
+        JButton powerButton = new OperationButton(new PowerOperation(), this);
+        JButton rootsButton = new OperationButton(new RootOperation(), this);
+        JButton phasorButton = new OperationButton(new PhasorOperation(), this);
         jPanel.add(sumButton);
         jPanel.add(subtractButton);
         jPanel.add(multiplyButton);
         jPanel.add(divideButton);
+        jPanel.add(powerButton);
+        jPanel.add(rootsButton);
+        jPanel.add(phasorButton);
 
         jPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
         contentPane.add(jPanel);
