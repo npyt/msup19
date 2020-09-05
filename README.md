@@ -4,7 +4,7 @@
 - [X] Operaciones básicas (7/5)
 - [X] Operaciones avanzadas (21/5)
 - [X] Suma fasores (30/5)
-- [ ] Interfaz gráfica (17/6)
+- [X] Interfaz gráfica (17/6)
 
 Indice
 ---
